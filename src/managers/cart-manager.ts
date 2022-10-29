@@ -5,6 +5,7 @@ import Response from "../models/response";
 import Cart from "../models/cart";
 import CartFile from "../models/cart-file";
 import ProductManager from "./product-manager";
+import Product from "../models/product";
 
 class CartManager {
 	private fileDir :string;
@@ -83,8 +84,8 @@ class CartManager {
 				throw fileread.response;
 			}
 			let file :CartFile = fileread.response;
-			let index = file.carts.findIndex(cart => cart.id == id);
-			if(index == -1 || !index) {
+			let index = file.carts.findIndex((cart :Cart) => cart.id == id);
+			if(index == -1 || typeof(index) != "number") {
 				throw "the cart doesn't exist";
 			}
 			file.carts.splice(index, 1)
@@ -112,11 +113,11 @@ class CartManager {
 			if(!getproduct.success) {
 				throw getproduct.response;
 			}
-			let product = getproduct.response;
+			let product = getproduct.response.product;
 
 
-			let index = cartfile.carts.findIndex(cart => cart.id == cartId);
-			if(index == -1 || !index) {
+			let index = cartfile.carts.findIndex((cart :Cart) => cart.id == cartId);
+			if(index == -1 || typeof(index) != "number") {
 				throw "the cart doesn't exist";
 			}
 
@@ -142,12 +143,12 @@ class CartManager {
 			}
 			let cartfile :CartFile = cartfileread.response;
 
-			let cartIndex = cartfile.carts.findIndex(cart => cart.id == cartId);
-			if(cartIndex == -1 || !cartIndex) {
+			let cartIndex = cartfile.carts.findIndex((cart :Cart) => cart.id == cartId);
+			if(cartIndex == -1 || typeof(cartIndex) != "number") {
 				throw "the cart doesn't exist";
 			}
-			let productIndex = cartfile.carts[cartIndex].products?.findIndex(product => product.id == productId);
-			if(productIndex == -1 || !productIndex) {
+			let productIndex = cartfile.carts[cartIndex].products?.findIndex((product:Product) => product.id == productId);
+			if(productIndex == -1 || typeof(productIndex) != "number") {
 				throw "there is no product in the cart with the submitted id";
 			}
 
