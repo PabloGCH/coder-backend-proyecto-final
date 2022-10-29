@@ -3,20 +3,32 @@
 	"products": [
 		{
 			"id": 1,
+			"code": "6D5SD",
+			"description":"Un lapiz",
 			"name": "Lapiz",
+			"timestamp": "date",
 			"price": 20,
+			"stock": 80,
 			"imgUrl": "https://cdn0.iconfinder.com/data/icons/shift-free/32/Pencil-256.png"
 		},
 		{
 			"id": 2,
+			"description":"Una goma",
+			"code": "ASDAS",
 			"name": "Goma",
+			"timestamp": "date",
 			"price": 2,
+			"stock": 60,
 			"imgUrl": "https://cdn1.iconfinder.com/data/icons/education-filled-outline-8/64/Education-Filled_26-256.png"
 		},
 		{
 			"id": 3,
+			"description":"Una regla",
+			"code": "NLKNN",
+			"timestamp": "date",
 			"name": "regla",
 			"price": 40,
+			"stock": 76,
 			"imgUrl": "https://cdn1.iconfinder.com/data/icons/design-5/32/ruler-256.png"
 		}
 	]
