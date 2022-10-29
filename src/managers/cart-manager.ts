@@ -20,7 +20,7 @@ class CartManager {
 			return {response: JSON.parse(await fs.promises.readFile(this.fileDir, "utf-8")), success: true};
 		}
 		catch(err) {
-			return {response: "failed to read product file", success: false}
+			return {response: "failed to read cart file", success: false}
 
 		}
 	}
@@ -43,9 +43,10 @@ class CartManager {
 			file.lastId++;
 			let newCart :Cart = {
 				id: file.lastId,
-				timestamp: Date(),
+				timestamp: Date.now().toString(),
 				products: []
 			};
+			console.log(file);
 			file.carts.push(newCart);
 			let filewrite = await this.writeFile(file);
 			if(!filewrite.success) {
