@@ -17,6 +17,7 @@ class ProductManager {
 			return {response: JSON.parse(await fs.promises.readFile(this.fileDir, "utf-8")), success: true};
 		}
 		catch(err) {
+			console.log(err)
 			return {response: "failed to read product file", success: false}
 
 		}
