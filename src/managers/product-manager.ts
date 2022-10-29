@@ -98,7 +98,7 @@ class ProductManager {
 			return {response:err, success: false};
 		}
 	}
-	public async deleteById(id:number) :Promise<Response>{
+	public async deleteById(id:number|string) :Promise<Response>{
 		try {
 			let fileread :Response = await this.readFile();
 			if(!fileread.success) {
@@ -120,7 +120,7 @@ class ProductManager {
 			return {response: err, success: false};
 		}
 	}
-	public async edit(product:Product, id:number) :Promise<Response> {
+	public async edit(product:Product, id:number|string) :Promise<Response> {
 		try {
 			let fileread :Response = await this.readFile();
 			if(!fileread.success) {
