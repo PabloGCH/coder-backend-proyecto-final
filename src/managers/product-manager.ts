@@ -33,6 +33,7 @@ class ProductManager {
 	}
 	public async saveProduct(product :Product) :Promise<Response>{
 		try {
+			let errors :any[] = [];
 			let fileread = await this.readFile();
 			if(!fileread.success) {
 				throw fileread.response;
@@ -42,25 +43,21 @@ class ProductManager {
 			let newProduct :Product = {
 				id: file.lastId
 			};
-			if(!product.name || !product.price) {
-				throw "Didn't provide proper name and price"
-			} else {
-				if(typeof(product.name) == "string") {
-					newProduct.name = product.name;
-				} else {
-					throw "Name must be a string";
-				}
-				if(typeof(product.price) == "number") {
-					newProduct.price = product.price;
-				} else {
-					throw "Price must be a number";
-				}
-				file.products.push(newProduct);
-				let filewrite = await this.writeFile(file);
-				if(!filewrite.success) {
-					throw filewrite.response;
-				}
 
+			typeof(product.name) == "string" ? newProduct.name = product.name : errors.push("Name must be a string");
+			typeof(product.price) == "number" ? newProduct.price = product.price : errors.push("Price must be a number");
+			typeof(product.code) == "string" ? newProduct.code = product.code : errors.push("Code must be a string");
+			if(errors.length > 0){throw errors}
+			typeof(product.imgUrl) == "string" ? newProduct.imgUrl = product.imgUrl : newProduct.imgUrl = "";
+			typeof(product.description) == "string" ? newProduct.description = product.description : newProduct.description = "";
+			(typeof(product.stock) == "number" && product.stock > 0) ? newProduct.stock = product.stock : newProduct.stock = 0;
+			newProduct.timestamp = Date.now().toString();
+
+
+			file.products.push(newProduct);
+			let filewrite = await this.writeFile(file);
+			if(!filewrite.success) {
+				throw filewrite.response;
 			}
 			return {response: {message: "product succesfully added", product: newProduct}, success: true};
 		}

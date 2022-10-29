@@ -8,11 +8,9 @@ import cartRouter from "./routes/cart-routing";
 //init variables
 const app = express();
 const router = express.Router();
-/*
 //tools
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-*/
 
 //sub routers
 app.use("/products", productsRouter);
