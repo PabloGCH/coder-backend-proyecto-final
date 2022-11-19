@@ -1,9 +1,9 @@
 import fs from "fs";
 
 //models
-import Response from "../models/response";
-import Product from "../models/product";
-import ProductFile from "../models/product-file";
+import Response from "../../models/response";
+import Product from "../../models/product";
+import ProductFile from "../../models/product-file";
 
 
 class ProductManager {

@@ -1,6 +1,6 @@
 import express from "express";
 import path from "path";
-import CartManager from "../managers/cart-manager";
+import CartManager from "../daos/carts/cart-fs";
 import Response from "../models/response";
 
 const CARTFILEDIR = path.join(__dirname, "../assets/carts.json");

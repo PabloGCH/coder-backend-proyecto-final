@@ -1,11 +1,11 @@
 import fs from "fs";
 
 //models
-import Response from "../models/response";
-import Cart from "../models/cart";
-import CartFile from "../models/cart-file";
-import ProductManager from "./product-manager";
-import Product from "../models/product";
+import Response from "../../models/response";
+import Cart from "../../models/cart";
+import CartFile from "../../models/cart-file";
+import ProductManager from "../products/product-fs";
+import Product from "../../models/product";
 
 class CartManager {
 	private fileDir :string;

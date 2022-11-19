@@ -1,6 +1,6 @@
 import express from "express";
 import path from "path";
-import ProductManager from "../managers/product-manager";
+import ProductManager from "../daos/products/product-fs";
 import Response from "../models/response";
 import isAdmin from "../middlewares/is-admin";
 
