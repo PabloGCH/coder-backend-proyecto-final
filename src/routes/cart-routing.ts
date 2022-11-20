@@ -1,12 +1,13 @@
 import express from "express";
 import path from "path";
-import CartManager from "../daos/carts/cart-fs";
 import Response from "../models/response";
+import CartManager from "../daos/carts/cart-mongo";
 
-const CARTFILEDIR = path.join(__dirname, "../assets/carts.json");
-const PRODUCTFILEDIR = path.join(__dirname, "../assets/products.json");
+//const CARTFILEDIR = path.join(__dirname, "../assets/carts.json");
+//const PRODUCTFILEDIR = path.join(__dirname, "../assets/products.json");
 
-const cartManager :CartManager = new CartManager(CARTFILEDIR, PRODUCTFILEDIR);
+//const cartManager :CartManager = new CartManager(CARTFILEDIR, PRODUCTFILEDIR);
+const cartManager :CartManager = new CartManager();
 
 var cartRouter = express.Router();
 

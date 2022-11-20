@@ -5,7 +5,7 @@ import ProductManager from "../daos/products/product-mongo"
 import Response from "../models/response";
 import isAdmin from "../middlewares/is-admin";
 
-const PRODUCTFILEDIR = path.join(__dirname, "../assets/products.json");
+//const PRODUCTFILEDIR = path.join(__dirname, "../assets/products.json");
 //const productManager :ProductManager = new ProductManager(PRODUCTFILEDIR);
 const productManager :ProductManager = new ProductManager();
 var productsRouter = express.Router();
