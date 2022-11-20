@@ -19,6 +19,7 @@
 	"homepage": "https://github.com/PabloGCH/coder-backend-proyecto-final#readme",
 	"devDependencies": {
 		"@types/express": "^4.17.14",
+		"@types/mongoose": "^5.11.97",
 		"@types/node": "^18.11.7",
 		"nodemon": "^2.0.20",
 		"ts-loader": "^9.4.1",

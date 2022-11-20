@@ -1,12 +1,13 @@
 import express from "express";
 import path from "path";
-import ProductManager from "../daos/products/product-fs";
+//import ProductManager from "../daos/products/product-fs";
+import ProductManager from "../daos/products/product-mongo"
 import Response from "../models/response";
 import isAdmin from "../middlewares/is-admin";
 
 const PRODUCTFILEDIR = path.join(__dirname, "../assets/products.json");
-const productManager :ProductManager = new ProductManager(PRODUCTFILEDIR);
-
+//const productManager :ProductManager = new ProductManager(PRODUCTFILEDIR);
+const productManager :ProductManager = new ProductManager();
 var productsRouter = express.Router();
 
 productsRouter.get("/", (req, res) => {
