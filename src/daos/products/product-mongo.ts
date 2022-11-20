@@ -1,8 +1,7 @@
 import { error } from "console";
 import mongoose from "mongoose";
 import { productModel } from "../../models/product-model-mongo";
-
-const URL = "mongodb+srv://pablo:coder@coder.bkt7yqu.mongodb.net/ecommerce?retryWrites=true&w=majority"
+import { config } from "../../config/config";
 
 //models
 import Response from "../../models/response";
@@ -10,7 +9,7 @@ import Product from "../../models/product";
 
 class ProductManager {
 	constructor() {
-		mongoose.connect(URL).then(
+		mongoose.connect(config.mongo.ulr||"").then(
 			() => {
 				console.log("connection successful")
 			},

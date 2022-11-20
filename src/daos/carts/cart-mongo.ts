@@ -5,15 +5,14 @@ import Response from "../../models/response";
 import ProductManager from "../products/product-mongo";
 import { Cart, cartModel } from "../../models/cart-model-mongo";
 import { productModel } from "../../models/product-model-mongo";
-
-const URL = "mongodb+srv://pablo:coder@coder.bkt7yqu.mongodb.net/ecommerce?retryWrites=true&w=majority"
+import { config } from "../../config/config";
 
 class CartManager {
 	private productManager :ProductManager;
 
 	constructor() {
 		this.productManager = new ProductManager();
-		mongoose.connect(URL).then(
+		mongoose.connect(config.mongo.ulr||"").then(
 			() => {
 				console.log("connection successful")
 			},
