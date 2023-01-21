@@ -20,6 +20,7 @@ app.use("/cart", cartRouter);
 
 
 app.listen(4000, () => {
+	console.log(process.env.DB_MONGO_url)
 	console.log("Server listening on port 4000")
 })
 
