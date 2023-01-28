@@ -1,8 +1,5 @@
 import express from "express";
 import path from "path";
-import ProductManager from "../daos/products/product-mongo"
-import Response from "../models/response";
-
 
 const siteRouter = express.Router();
 
