@@ -38,10 +38,12 @@ passport.use("signupStrategy", new passportLocal.Strategy(
 
 authRouter.get("/logoff", (req :Request|any, res) => {
 	req.logout((err :any) => {
-		if(err) return res.send("failed to close session");
-		req.session.destroy(() => {
-			console.log(err);
-		});
+		if(err) { return res.send({success: false, message:"failed to close session"})}
+		else {
+			req.session.destroy(() => {
+				res.send({success: true, message: "logged off successfully"})
+			});
+		}
 	})
 });
 
@@ -56,15 +58,15 @@ authRouter.post("/login", (req:any, res) => {
 	const body = req.body;
 	if(req.session.user) {
 		res.send({message:"already logged"})
-	} else if(body.username && body.password) {
-		UserModel.findOne({username: body.username}, (err:any, userFound:any) => {
+	} else if(body.email && body.password) {
+		UserModel.findOne({email: body.email}, (err:any, userFound:any) => {
 			if(err) {
 				res.send(err)
 			}
 			if(userFound) {
 				if(bcrypt.compareSync(body.password, userFound.password)) {
 					req.session.user = {
-						username: body.username,
+						email: body.email,
 						password: body.password
 					}
 					res.send({success: true, message: "Session initialized"})
@@ -77,6 +79,6 @@ authRouter.post("/login", (req:any, res) => {
 	} else {
 		res.send({success: false, message: "Invalid user inputs"})
 	}
-})
+});
 
 export default authRouter;
