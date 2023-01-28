@@ -8,7 +8,7 @@ import isAdmin from "../middlewares/is-admin";
 //const PRODUCTFILEDIR = path.join(__dirname, "../assets/products.json");
 //const productManager :ProductManager = new ProductManager(PRODUCTFILEDIR);
 const productManager :ProductManager = new ProductManager();
-var productsRouter = express.Router();
+const productsRouter = express.Router();
 
 productsRouter.get("/", (req, res) => {
 	productManager.getAll().then((result :Response) => {

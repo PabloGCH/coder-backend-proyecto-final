@@ -14,10 +14,10 @@ class CartManager {
 		this.productManager = new ProductManager();
 		mongoose.connect(config.mongo.ulr||"").then(
 			() => {
-				console.log("connection successful")
+				console.log("DB connection successful")
 			},
 			err => {
-				throw new Error("connection failed");
+				throw new Error("DB connection failed");
 			}
 		)
 	}
