@@ -96,6 +96,7 @@ authRouter.post("/login", (req:any, res) => {
 					req.session.user = {
 						id: userFound._id,
 						username: userFound.username,
+						password: userFound.password,
 						phone: userFound.phone,
 						email: userFound.email,
 					}

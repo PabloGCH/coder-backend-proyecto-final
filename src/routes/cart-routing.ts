@@ -3,6 +3,7 @@ import path from "path";
 import Response from "../models/response";
 import CartManager from "../daos/carts/cart-mongo";
 import Cart from "../models/cart";
+import isAuthenticated from "../middlewares/is-authenticated";
 
 //const CARTFILEDIR = path.join(__dirname, "../assets/carts.json");
 //const PRODUCTFILEDIR = path.join(__dirname, "../assets/products.json");
@@ -15,19 +16,14 @@ var cartRouter = express.Router();
 
 
 //Consigue un carrito activo, si no existe lo crea
-cartRouter.post("/", (req:any, res) => {
+cartRouter.post("/", isAuthenticated, (req:any, res) => {
 	const userId = req.session.user.id;
-	if(userId) {
-		cartManager.getCart(userId).then((result :Response) => {
-			res.send(result);
-		})
-	} else {
-		res.send({success: false, message: "Must be logged in"});
-	}
-
+	cartManager.getCart(userId).then((result :Response) => {
+		res.send(result);
+	})
 });
 
-cartRouter.put("/order/:id", (req:any, res) => {
+cartRouter.put("/order/:id", isAuthenticated, (req:any, res) => {
 	let {id} = req.params;
 	cartManager.orderCart(id, req.session.user.username).then((result :Response) => {
 		res.send(result);
@@ -35,14 +31,14 @@ cartRouter.put("/order/:id", (req:any, res) => {
 })
 
 
-cartRouter.delete("/:id", (req, res) => {
+cartRouter.delete("/:id", isAuthenticated, (req, res) => {
 	let {id} = req.params;
 	cartManager.deleteById(id).then((result :Response) => {
 		res.send(result);
 	})
 });
 
-cartRouter.get("/:id/products", (req, res) => {
+cartRouter.get("/:id/products", isAuthenticated, (req, res) => {
 	let {id} = req.params;
 	cartManager.getProductsById(id).then((result :Response) => {
 		res.send(result);
@@ -50,7 +46,7 @@ cartRouter.get("/:id/products", (req, res) => {
 });
 
 
-cartRouter.post("/:id/products/:id_prod", (req, res) => {
+cartRouter.post("/:id/products/:id_prod", isAuthenticated, (req, res) => {
 	let {id, id_prod} = req.params;
 	cartManager.addProduct(id, id_prod).then((result :Response) => {
 		res.send(result);
@@ -58,7 +54,7 @@ cartRouter.post("/:id/products/:id_prod", (req, res) => {
 });
 
 
-cartRouter.delete("/:id/products/:id_prod", (req, res) => {
+cartRouter.delete("/:id/products/:id_prod", isAuthenticated, (req, res) => {
 	let {id, id_prod} = req.params;
 	cartManager.removeProduct(id, id_prod).then((result :Response) => {
 		res.send(result);
