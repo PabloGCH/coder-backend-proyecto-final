@@ -31,7 +31,7 @@ const router = express.Router();
 //Native config
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 //Passport config
 app.use(session({
 	store: MongoStore.create({mongoUrl: config.mongo.ulr}),
@@ -60,8 +60,6 @@ app.use("/api/products", productsRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/auth", authRouter);
 app.use("/site", siteRouter);
-
-
 
 app.listen(process.env.PORT, () => {
 	console.log("Server listening on port " + process.env.PORT)

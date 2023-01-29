@@ -105,6 +105,7 @@ authRouter.post("/login", (req:any, res) => {
 					res.send({success: false, message: "Invalid password"})
 				}
 			}
+			res.send({success: false, message: "The user does not exist"})
 		})
 
 	} else {

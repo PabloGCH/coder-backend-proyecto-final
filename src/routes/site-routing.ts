@@ -1,10 +1,11 @@
 import express from "express";
 import path from "path";
+import isAuthenticated from "../middlewares/is-authenticated";
 
 const siteRouter = express.Router();
 
 
-siteRouter.get("/home", (req, res) => {
+siteRouter.get("/home", isAuthenticated, (req, res) => {
 	res.sendFile(path.join(__dirname, '../../public/site/home', 'home.html'))
 })
 

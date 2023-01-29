@@ -129,17 +129,16 @@ class CartManager {
 				</div>
 				`
 			});
-			const response = await smsClient.messages.create({
+			await smsClient.messages.create({
 				body: "Your order is being processed",
 				from: process.env.SERVER_PHONE,
 				to:  userphone || ""
 			})
-			const wspResponse = await smsClient.messages.create({
+			await smsClient.messages.create({
 				body: `NEW ORDER FROM ${username}`,
 				from: process.env.SERVER_WSP_PHONE || "",
 				to:  "whatsapp:" + process.env.ADMIN_PHONE || ""
 			})
-			console.log(wspResponse)
 			return {response: "Cart order sent", success: true};;
 		}
 		catch(err) {

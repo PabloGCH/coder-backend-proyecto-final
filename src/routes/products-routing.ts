@@ -13,34 +13,34 @@ const productsRouter = express.Router();
 
 productsRouter.get("/", (req, res) => {
 	productManager.getAll().then((result :Response) => {
-		res.send(result.response);
+		res.send(result);
 	})
 })
 
 productsRouter.get("/:id", (req, res) => {
 	let {id} = req.params;
 	productManager.getProductById(id).then((result :Response) => {
-		res.send(result.response);
+		res.send(result);
 	})
 })
 
 productsRouter.post("/", isAuthenticated, isAdmin, (req, res) => {
 	productManager.saveProduct(req.body).then((result :Response) => {
-		res.send(result.response);
+		res.send(result);
 	})
 })
 
 productsRouter.put("/:id", isAuthenticated, isAdmin, (req, res) => {
 	let {id} = req.params;
 	productManager.edit(req.body, id).then((result :Response) => {
-		res.send(result.response);
+		res.send(result);
 	})
 })
 
 productsRouter.delete("/:id", isAuthenticated, isAdmin, (req, res) => {
 	let {id} = req.params;
 	productManager.deleteById(id).then((result :Response) => {
-		res.send(result.response);
+		res.send(result);
 	})
 })
 
