@@ -3,7 +3,6 @@ import path from "path";
 //import ProductManager from "../daos/products/product-fs";
 import ProductManager from "../daos/products/product-mongo"
 import Response from "../models/response";
-import isAdmin from "../middlewares/is-admin";
 import isAuthenticated from "../middlewares/is-authenticated";
 
 //const PRODUCTFILEDIR = path.join(__dirname, "../assets/products.json");
@@ -24,20 +23,20 @@ productsRouter.get("/:id", (req, res) => {
 	})
 })
 
-productsRouter.post("/", isAuthenticated, isAdmin, (req, res) => {
+productsRouter.post("/", isAuthenticated, (req, res) => {
 	productManager.saveProduct(req.body).then((result :Response) => {
 		res.send(result);
 	})
 })
 
-productsRouter.put("/:id", isAuthenticated, isAdmin, (req, res) => {
+productsRouter.put("/:id", isAuthenticated, (req, res) => {
 	let {id} = req.params;
 	productManager.edit(req.body, id).then((result :Response) => {
 		res.send(result);
 	})
 })
 
-productsRouter.delete("/:id", isAuthenticated, isAdmin, (req, res) => {
+productsRouter.delete("/:id", isAuthenticated, (req, res) => {
 	let {id} = req.params;
 	productManager.deleteById(id).then((result :Response) => {
 		res.send(result);
