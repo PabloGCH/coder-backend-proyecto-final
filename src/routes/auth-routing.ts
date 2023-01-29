@@ -56,7 +56,6 @@ authRouter.post("/register", passport.authenticate("signupStrategy", {
 }), async (req:any,res) => {
 	try {
 		if(req.success) {
-			//SEND MAIL TO ADMIN
 			mailClient.sendMail({
 				from: "server",
 				to: process.env.ADMIN_MAIL,
@@ -73,7 +72,6 @@ authRouter.post("/register", passport.authenticate("signupStrategy", {
 				</div>
 				`
 			});
-			//SEND MESSAGE TO ADMIN
 		}
 		res.send({success: req.success || false, message: req.message||""})
 	} catch(err) {

@@ -9,14 +9,7 @@ import Product from "../../models/product";
 
 class ProductManager {
 	constructor() {
-		mongoose.connect(config.mongo.ulr||"").then(
-			() => {
-				console.log("DB connection successful")
-			},
-			err => {
-				throw new Error("DB connection failed");
-			}
-		)
+
 	}
 
 	public async saveProduct(product :Product) :Promise<Response>{

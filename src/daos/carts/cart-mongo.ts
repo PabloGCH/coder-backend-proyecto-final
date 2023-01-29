@@ -14,14 +14,7 @@ import { mailClient, smsClient } from "../../mailer/mailer";
 
 class CartManager {
 	constructor() {
-		mongoose.connect(config.mongo.ulr||"").then(
-			() => {
-				console.log("DB connection successful")
-			},
-			err => {
-				throw new Error("DB connection failed");
-			}
-		)
+
 	}
 
 	public async getCart(userId :string) :Promise<Response>{

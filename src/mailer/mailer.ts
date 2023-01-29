@@ -14,7 +14,6 @@ export const mailClient = nodemailer.createTransport({
 	}
 })
 
-console.log((process.env.TWILIO_ACCOUNT_ID, process.env.TWILIO_AUTH_TOKEN))
 export const smsClient = twilio(process.env.TWILIO_ACCOUNT_ID, process.env.TWILIO_AUTH_TOKEN)
 
 

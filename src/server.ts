@@ -1,9 +1,13 @@
 //Dependencies
-//===========================================================
+import cluster from "cluster";
+import os from "os";
 import express from "express";
 import passport from "passport";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config()
 
 //Route imports
 //==========================================================
@@ -21,10 +25,12 @@ import authRouter from "./routes/auth-routing";
 //==========================================================
 import { config } from "./config/config";
 
+
+
 //Init variables
 //==========================================================
 const app = express();
-const router = express.Router();
+const NUMBEROFCORES = os.cpus().length;
 
 //Tools
 //==========================================================
@@ -61,9 +67,33 @@ app.use("/api/cart", cartRouter);
 app.use("/api/auth", authRouter);
 app.use("/site", siteRouter);
 
-app.listen(process.env.PORT, () => {
-	console.log("Server listening on port " + process.env.PORT)
-})
+mongoose.connect(config.mongo.ulr||"").then(
+	() => {
+		console.log("DB connection successful")
+	},
+	err => {
+		throw new Error("DB connection failed");
+	}
+)
+
+if(process.env.MODE == "CLUSTER" && cluster.isPrimary) {
+	console.log("Server initialized on cluster mode");
+	for(let i = 0; i < NUMBEROFCORES; i++) {
+		cluster.fork();
+	}
+	cluster.on("exit", (worker, error) => {
+		//RE RUN SUB PROCESS ON FAILURE
+		cluster.fork();
+	})
+} else {
+	if(process.env.MODE == "FORK") {console.log("Server initialized on fork mode")}
+	app.listen(process.env.PORT, () => {
+		if(process.env.MODE == "CLUSTER") {console.log("New server initialized on port " + process.env.PORT)}
+		if(process.env.MODE == "FORK") {console.log("Server listening on port " + process.env.PORT)}
+
+	});
+}
+
 
 
 
