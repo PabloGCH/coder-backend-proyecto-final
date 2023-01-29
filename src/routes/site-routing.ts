@@ -1,15 +1,16 @@
 import express from "express";
 import path from "path";
-import isAuthenticated from "../middlewares/is-authenticated";
+import autoLog from "../middlewares/auto-log";
+import siteGuard from "../middlewares/site-guard";
 
 const siteRouter = express.Router();
 
 
-siteRouter.get("/home", isAuthenticated, (req, res) => {
+siteRouter.get("/home", siteGuard, (req, res) => {
 	res.sendFile(path.join(__dirname, '../../public/site/home', 'home.html'))
 })
 
-siteRouter.get("/login", (req, res) => {
+siteRouter.get("/login", autoLog,(req, res) => {
 	res.sendFile(path.join(__dirname, '../../public/site/login', 'login.html'))
 })
 
@@ -17,7 +18,7 @@ siteRouter.get("/register", (req, res) => {
 	res.sendFile(path.join(__dirname, '../../public/site/register', 'register.html'))
 })
 
-siteRouter.get("/cart", (req, res) => {
+siteRouter.get("/cart",  siteGuard, (req, res) => {
 	res.sendFile(path.join(__dirname, '../../public/site/cart', 'cart.html'))
 })
 

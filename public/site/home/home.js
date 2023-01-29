@@ -6,11 +6,12 @@ async function logoff() {
 	let fetchOptions = {
 		method: "GET",
 		headers: {'Content-Type': 'application/json'},
-		body: JSON.stringify(body)
 	}
-	await fetch("/api/auth/logoff", fetchOptions)
-	let  data = await res.json();
-	console.log(data)
+	const res = await fetch("/api/auth/logoff", fetchOptions)
+	let data = await res.json();
+	if(data.success) {
+		window.location.href = "/site/login";
+	}
 }
 
 async function getCart() {

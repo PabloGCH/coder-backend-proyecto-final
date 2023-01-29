@@ -16,7 +16,7 @@ async function login() {
 	const res = await fetch("/api/auth/login", fetchOptions);
 	const data = await res.json();
 	if(data.success) {
-		window.location.href = "/api/auth/home";
+		window.location.href = "/site/home";
 	} else {
 		failMessage.style.display = "block"
 	}
