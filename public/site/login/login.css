@@ -54,3 +54,8 @@ main {
 	justify-self: flex-end;
 	color: red;
 }
+a {
+	color: white;
+	text-decoration: underline;
+}
+
