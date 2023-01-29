@@ -1,5 +1,13 @@
+const notification = document.getElementById("notification");
 const productContainer = document.getElementById("product-container");
-const currentCartId = "";
+let currentCartId = "";
+
+async function showAddedNotification() {
+	notification.style.display = "block";
+	setTimeout(() => {
+		notification.style.display = "none";
+	}, 1500)
+}
 
 
 async function logoff() {
@@ -21,14 +29,21 @@ async function getCart() {
 	}
 	let res = await fetch("/api/cart", fetchOptions)
 	let  data = await res.json();
-	console.log(data)
 	if(data.success) {
+		currentCartId = data.response.cartId;
 	}
 }
 
-async function addToCart(id) {
-	if(!currentCartId) {
-		await getCart();
+async function addToCart(productId) {
+	if(!currentCartId) { await getCart()}
+	let fetchOptions = {
+		method: "POST",
+		headers: {'Content-Type': 'application/json'}
+	}
+	const res = await fetch(`/api/cart/${currentCartId}/products/${productId}`, fetchOptions)
+	let data = await res.json();
+	if(data.success) {
+		showAddedNotification();
 	}
 }	
 
@@ -37,12 +52,11 @@ async function getProducts() {
 		method: "GET",
 		headers: {'Content-Type': 'application/json'},
 	}
-	let res = await fetch("/api/products", fetchOptions)
+	const res = await fetch("/api/products", fetchOptions)
 	let data = await res.json();
 	if(data.success) {
 		productContainer.innerHTML = "";
 		const products = data.response.products;
-		console.log(products)
 		products.forEach(product => {
 			let productBox = document.createElement("div");
 			productBox.className = "product-box";
