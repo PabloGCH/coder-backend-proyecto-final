@@ -1,0 +1,4 @@
+[2023-01-29T17:34:35.721] [ERROR] errors - { message: 'Failed to get products', error: 'error log test' }
+[2023-01-29T17:34:36.908] [ERROR] errors - { message: 'Failed to get products', error: 'error log test' }
+[2023-01-29T17:34:45.657] [ERROR] errors - { message: 'Failed to get products', error: 'error log test' }
+[2023-01-29T17:34:46.592] [ERROR] errors - { message: 'Failed to get products', error: 'error log test' }

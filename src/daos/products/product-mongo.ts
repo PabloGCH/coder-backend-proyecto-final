@@ -6,6 +6,7 @@ import { config } from "../../config/config";
 //models
 import Response from "../../models/response";
 import Product from "../../models/product";
+import { errorLogger } from "../../logger/logger";
 
 class ProductManager {
 	constructor() {
@@ -19,6 +20,10 @@ class ProductManager {
 			return {response: {message: "product succesfully added", product: newProduct}, success: true};
 		}
 		catch(err) {
+			errorLogger.error({
+				message: "Failed to add product",
+				error: err
+			})
 			return {response: err, success: false}
 		}
 	}
@@ -28,6 +33,10 @@ class ProductManager {
 			return {response: {message: "product retrieved",  product:product}, success: true};
 		}
 		catch(err) {
+			errorLogger.error({
+				message: "Failed to get product",
+				error: err
+			})
 			return {response: err, success: false};
 		}
 	}
@@ -37,6 +46,10 @@ class ProductManager {
 			return {response: {message: "products retrieved", products: products}, success: true};
 		}
 		catch(err) {
+			errorLogger.error({
+				message: "Failed to get products",
+				error: err
+			})
 			return {response:err, success: false};
 		}
 	}
@@ -46,6 +59,10 @@ class ProductManager {
 			return {response: "product succesfully deleted", success: false};
 		}
 		catch(err) {
+			errorLogger.error({
+				message: "Failed to delete product",
+				error: err
+			})
 			return {response: err, success: false};
 		}
 	}
@@ -55,6 +72,10 @@ class ProductManager {
 			return {response: {message: "product edited with success", product: newProduct}, success: true};
 		} 
 		catch(err) {
+			errorLogger.error({
+				message: "Failed to edit product",
+				error: err
+			})
 			return {response: err, success: false};;
 		}
 	}
