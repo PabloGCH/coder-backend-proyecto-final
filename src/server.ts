@@ -67,6 +67,9 @@ app.use("/api/products", productsRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/auth", authRouter);
 app.use("/site", siteRouter);
+app.get("/", (req, res) => {
+	res.redirect("/site/home");
+})
 
 mongoose.connect(config.mongo.ulr||"").then(
 	() => {
