@@ -8,6 +8,7 @@ import { productModel } from "../../models/product-model-mongo";
 import { config } from "../../config/config";
 import CART_STATUS from "../../enums/cartStatus";
 import { mailClient, smsClient } from "../../mailer/mailer";
+import { errorLogger } from "../../logger/logger";
 
 
 
@@ -33,6 +34,10 @@ class CartManager {
 			}
 		}
 		catch(err) {
+			errorLogger.error({
+				message: "Failed to get a cart",
+				error: err
+			})
 			return {response: err, success: false}
 		}
 	}
@@ -52,6 +57,10 @@ class CartManager {
 			return {response: {message: "products retrieved",  products: products}, success: true};
 		}
 		catch(err) {
+			errorLogger.error({
+				message: "Failed to get a cart's products",
+				error: err
+			})
 			return {response: err, success: false};
 		}
 	}
@@ -72,6 +81,10 @@ class CartManager {
 			return {response: "product added to cart with success", success: true};
 		} 
 		catch(err) {
+			errorLogger.error({
+				message: "Failed to add product to cart",
+				error: err
+			})
 			return {response: err, success: false};;
 		}
 	}
@@ -83,6 +96,10 @@ class CartManager {
 			return {response: "product removed from cart with success", success: true};
 		} 
 		catch(err) {
+			errorLogger.error({
+				message: "Failed to remove product from cart",
+				error: err
+			})
 			return {response: err, success: false};;
 		}
 	}
@@ -139,6 +156,10 @@ class CartManager {
 			return {response: "Cart order sent", success: true};;
 		}
 		catch(err) {
+			errorLogger.error({
+				message: "Failed to sent order from cart",
+				error: err
+			})
 			return {response: err, success: false};;
 		}
 	}
