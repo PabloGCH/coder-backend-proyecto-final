@@ -7,6 +7,7 @@ import { userInfo } from "os";
 import User from "../models/user";
 import { config } from "dotenv";
 import { mailClient } from "../mailer/mailer";
+import { errorLogger } from "../logger/logger";
 
 
 const authRouter = express.Router();
@@ -21,33 +22,53 @@ passport.use("signupStrategy", new passportLocal.Strategy(
 		passReqToCallback: true,
 	},
 	(req, username, password, done) => {
-		UserModel.findOne({username: username}, (err:any, userFound:any) => {
-			if(err) return done(err);
-			if(userFound) {
-				Object.assign(req, {success: false,message: "user already exists"})
-				return done(null, userFound);
-			}
-			const newUser :User = req.body;
-			newUser.password = createHash(newUser.password)
-			UserModel.create(newUser, (err, userCreated) => {
-				if(err) return done(err, userCreated, {message: "failed to register user"});
-				Object.assign(req, {success: true, user: userCreated ,message: "User created"})
-				return done(null, userCreated)
+		try {
+			UserModel.findOne({username: username}, (err:any, userFound:any) => {
+				if(err) return done(err);
+				if(userFound) {
+					Object.assign(req, {success: false,message: "user already exists"})
+					return done(null, userFound);
+				}
+				const newUser :User = req.body;
+				newUser.password = createHash(newUser.password)
+				UserModel.create(newUser, (err, userCreated) => {
+					if(err) return done(err, userCreated, {message: "failed to register user"});
+					Object.assign(req, {success: true, user: userCreated ,message: "User created"})
+					return done(null, userCreated)
+				})
 			})
+		} catch(err) {
+			errorLogger.error({
+				message: "Failed to register user",
+				error: err
+			})
+		}
 
-		})
 	}
 ));
 
 authRouter.get("/logoff", (req :Request|any, res) => {
-	req.logout((err :any) => {
-		if(err) { return res.send({success: false, message:"failed to close session"})}
-		else {
-			req.session.destroy(() => {
-				res.send({success: true, message: "logged off successfully"})
-			});
-		}
-	})
+	try {
+		req.logout((err :any) => {
+			if(err) {
+				errorLogger.error({
+					message: "Failed to close user session"
+				})
+				return res.send({success: false, message:"Failed to close session"})
+			}
+			else {
+				req.session.destroy(() => {
+					res.send({success: true, message: "Logged off successfully"})
+				});
+			}
+		})
+	}
+	catch(err) {
+		errorLogger.error({
+			message: "Failed to close user session"
+		})
+		res.send({success: false, message: "Failed to log off"})
+	}
 });
 
 authRouter.post("/register", passport.authenticate("signupStrategy", {
@@ -75,41 +96,55 @@ authRouter.post("/register", passport.authenticate("signupStrategy", {
 		}
 		res.send({success: req.success || false, message: req.message||""})
 	} catch(err) {
+		errorLogger.error({
+			message: "Failed to email admin about user registering",
+			error: err
+		})
 		res.send({success: false, message: err})
 	}
 
 });
 
 authRouter.post("/login", (req:any, res) => {
-	const body = req.body;
-	if(req.session.user) {
-		res.send({message:"already logged"})
-	} else if(body.email && body.password) {
-		UserModel.findOne({email: body.email}, (err:any, userFound:any) => {
-			if(err) {
-				res.send(err)
-			}
-			if(userFound) {
-				if(bcrypt.compareSync(body.password, userFound.password)) {
-					req.session.user = {
-						id: userFound._id,
-						username: userFound.username,
-						password: userFound.password,
-						phone: userFound.phone,
-						email: userFound.email,
-					}
-					res.send({success: true, message: "Session initialized"})
-				} else {
-					res.send({success: false, message: "Invalid password"})
+	try {
+		const body = req.body;
+		if(req.session.user) {
+			res.send({message:"already logged"})
+		} else if(body.email && body.password) {
+			UserModel.findOne({email: body.email}, (err:any, userFound:any) => {
+				if(err) {
+					res.send(err)
 				}
-			} else {
-				res.send({success: false, message: "The user does not exist"})
-			}
-		})
+				if(userFound) {
+					if(bcrypt.compareSync(body.password, userFound.password)) {
+						req.session.user = {
+							id: userFound._id,
+							username: userFound.username,
+							password: userFound.password,
+							phone: userFound.phone,
+							email: userFound.email,
+						}
+						res.send({success: true, message: "Session initialized"})
+					} else {
+						res.send({success: false, message: "Invalid password"})
+					}
+				} else {
+					res.send({success: false, message: "The user does not exist"})
+				}
+			})
 
-	} else {
-		res.send({success: false, message: "Invalid user inputs"})
+		} else {
+			res.send({success: false, message: "Invalid user inputs"})
+		}
 	}
+	catch(err) {
+		errorLogger.error({
+			message: "Failed to login user",
+			error: err
+		})
+		res.send({success: false, message: "Failed to login user"})
+	}
+
 });
 
 export default authRouter;
