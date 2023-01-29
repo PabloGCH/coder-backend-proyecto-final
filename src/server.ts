@@ -24,6 +24,7 @@ import authRouter from "./routes/auth-routing";
 //Config import
 //==========================================================
 import { config } from "./config/config";
+import { errorLogger, infoLogger, warningLogger } from "./logger/logger";
 
 
 
@@ -69,28 +70,33 @@ app.use("/site", siteRouter);
 
 mongoose.connect(config.mongo.ulr||"").then(
 	() => {
-		console.log("DB connection successful")
+		infoLogger.info("DB connection successful")
 	},
 	err => {
-		throw new Error("DB connection failed");
+		errorLogger.error({
+			message: "DB connection failed",
+			error: err
+		})
 	}
 )
 
 if(process.env.MODE == "CLUSTER" && cluster.isPrimary) {
-	console.log("Server initialized on cluster mode");
+	infoLogger.info("Server initialized on cluster mode")
 	for(let i = 0; i < NUMBEROFCORES; i++) {
 		cluster.fork();
 	}
 	cluster.on("exit", (worker, error) => {
-		//RE RUN SUB PROCESS ON FAILURE
+		warningLogger.warn({
+			message: `Subproccess with id ${worker.id} died and had to be run again`,
+			error: error
+		})
 		cluster.fork();
 	})
 } else {
-	if(process.env.MODE == "FORK") {console.log("Server initialized on fork mode")}
+	if(process.env.MODE == "FORK") {infoLogger.info("Server initialized on fork mode")}
 	app.listen(process.env.PORT, () => {
-		if(process.env.MODE == "CLUSTER") {console.log("New server initialized on port " + process.env.PORT)}
-		if(process.env.MODE == "FORK") {console.log("Server listening on port " + process.env.PORT)}
-
+		if(process.env.MODE == "CLUSTER") {infoLogger.info("New server initialized on port " + process.env.PORT)}
+		if(process.env.MODE == "FORK") {infoLogger.info("Server listening on port " + process.env.PORT)}
 	});
 }
 
