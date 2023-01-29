@@ -43,15 +43,19 @@ class CartManager {
 			return {response: err, success: false}
 		}
 	}
-	public async getProductsById(id :number|string) :Promise<Response>{
+	public async getProductsById(cartId :number|string) :Promise<Response>{
 		try {
-			let cart = await cartModel.findById(id);
-			let productIds :string[] = cart?.products || [];
-			let products  = await productModel.find({
-				_id: {
-					$in: productIds
-				}
-			});
+			let cart = await cartModel.findById(cartId);
+			if(!cart) {
+				throw "Cart does not exist";
+			}
+			let productsFromDb = await productModel.find({_id: { $in: cart?.products}})
+			const products :any[] = [];
+			cart?.products.forEach(el => {
+				let product = productsFromDb.find(p => p._id.toString() == el);
+				if(product) products.push(product);
+			})
+
 			return {response: {message: "products retrieved",  products: products}, success: true};
 		}
 		catch(err) {
