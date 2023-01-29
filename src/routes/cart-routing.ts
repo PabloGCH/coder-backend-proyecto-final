@@ -15,16 +15,21 @@ var cartRouter = express.Router();
 
 
 //Consigue un carrito activo, si no existe lo crea
-cartRouter.post("/:userId", (req, res) => {
-	let {userId} = req.params;
-	cartManager.getCart(userId).then((result :Response) => {
-		res.send(result);
-	})
+cartRouter.post("/", (req:any, res) => {
+	const userId = req.session.user.id;
+	if(userId) {
+		cartManager.getCart(userId).then((result :Response) => {
+			res.send(result);
+		})
+	} else {
+		res.send({success: false, message: "Must be logged in"});
+	}
+
 });
 
-cartRouter.put("/order/:id", (req, res) => {
+cartRouter.put("/order/:id", (req:any, res) => {
 	let {id} = req.params;
-	cartManager.orderCart(id).then((result :Response) => {
+	cartManager.orderCart(id, req.session.user.username).then((result :Response) => {
 		res.send(result);
 	})
 })

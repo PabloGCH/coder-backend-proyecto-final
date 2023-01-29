@@ -5,6 +5,9 @@ import bcrypt from "bcrypt";
 import { UserModel } from "../models/user-model-mongo";
 import { userInfo } from "os";
 import User from "../models/user";
+import { config } from "dotenv";
+import { transporter } from "../mailer/mailer";
+
 
 const authRouter = express.Router();
 
@@ -26,12 +29,12 @@ passport.use("signupStrategy", new passportLocal.Strategy(
 			}
 			const newUser :User = req.body;
 			newUser.password = createHash(newUser.password)
-			console.log(newUser)
 			UserModel.create(newUser, (err, userCreated) => {
 				if(err) return done(err, userCreated, {message: "failed to register user"});
-				Object.assign(req, {success: true,message: "User created"})
+				Object.assign(req, {success: true, user: userCreated ,message: "User created"})
 				return done(null, userCreated)
 			})
+
 		})
 	}
 ));
@@ -50,8 +53,33 @@ authRouter.get("/logoff", (req :Request|any, res) => {
 authRouter.post("/register", passport.authenticate("signupStrategy", {
 	failureRedirect: "/register",
 	failureMessage: true
-}), (req:any,res) => {
-	res.send({success: req.success || false, message: req.message||""})
+}), async (req:any,res) => {
+	try {
+		if(req.success) {
+			//SEND MAIL TO ADMIN
+			transporter.sendMail({
+				from: "server",
+				to: process.env.ADMIN_MAIL,
+				subject: "NEW USER",
+				html: `
+				<div>
+				<h1>New user has registered</h1>
+				<h2>User data: </h2>
+				<p>Id: <span>${req.user._id}</span></p>
+				<p>Name: <span>${req.user.username}</span></p>
+				<p>Email: <span>${req.user.email}</span></p>
+				<p>Address: <span>${req.user.address}</span></p>
+				<p>Phone: <span>${req.user.phone}</span></p>
+				</div>
+				`
+			});
+			//SEND MESSAGE TO ADMIN
+		}
+		res.send({success: req.success || false, message: req.message||""})
+	} catch(err) {
+		res.send({success: false, message: err})
+	}
+
 });
 
 authRouter.post("/login", (req:any, res) => {
@@ -66,8 +94,10 @@ authRouter.post("/login", (req:any, res) => {
 			if(userFound) {
 				if(bcrypt.compareSync(body.password, userFound.password)) {
 					req.session.user = {
-						email: body.email,
-						password: body.password
+						id: userFound._id,
+						username: userFound.username,
+						phone: userFound.phone,
+						email: userFound.email,
 					}
 					res.send({success: true, message: "Session initialized"})
 				} else {
