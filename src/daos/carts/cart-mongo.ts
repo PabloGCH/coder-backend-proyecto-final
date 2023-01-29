@@ -2,23 +2,18 @@ import mongoose from "mongoose";
 
 //models
 import Response from "../../models/response";
-import ProductManager from "../products/product-mongo";
 import Cart from "../../models/cart";
 import { cartModel } from "../../models/cart-model-mongo";
 import { productModel } from "../../models/product-model-mongo";
 import { config } from "../../config/config";
 import CART_STATUS from "../../enums/cartStatus";
-import { transporter } from "../../mailer/mailer";
-import Product from "../../models/product";
+import { mailClient, smsClient } from "../../mailer/mailer";
 
 
 
 
 class CartManager {
-	private productManager :ProductManager;
-
 	constructor() {
-		this.productManager = new ProductManager();
 		mongoose.connect(config.mongo.ulr||"").then(
 			() => {
 				console.log("DB connection successful")
@@ -95,7 +90,7 @@ class CartManager {
 		}
 	}
 
-	public async orderCart(cartId :number|string, username :string) :Promise<Response> {
+	public async orderCart(cartId :number|string, username :string, userphone :string) :Promise<Response> {
 		try {
 			let cart = await cartModel.findById(cartId);
 			if(!cart) {
@@ -120,7 +115,7 @@ class CartManager {
 			products.forEach(el => {
 				productsStr += `<li><span style="color: orange;font-weight:bold;">${el._id}</span> ${el.name} <span style="font-weight:bold; color: green;">$${el.price}</span></li>`
 			})
-			transporter.sendMail({
+			mailClient.sendMail({
 				from: "server",
 				to: process.env.ADMIN_MAIL,
 				subject: `NEW ORDER FROM ${username}`,
@@ -134,7 +129,17 @@ class CartManager {
 				</div>
 				`
 			});
-
+			const response = await smsClient.messages.create({
+				body: "Your order is being processed",
+				from: process.env.SERVER_PHONE,
+				to:  userphone || ""
+			})
+			const wspResponse = await smsClient.messages.create({
+				body: `NEW ORDER FROM ${username}`,
+				from: process.env.SERVER_WSP_PHONE || "",
+				to:  "whatsapp:" + process.env.ADMIN_PHONE || ""
+			})
+			console.log(wspResponse)
 			return {response: "Cart order sent", success: true};;
 		}
 		catch(err) {

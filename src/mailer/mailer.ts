@@ -1,7 +1,7 @@
-
+import twilio from "twilio";
 import nodemailer from "nodemailer";
 
-export const transporter = nodemailer.createTransport({
+export const mailClient = nodemailer.createTransport({
 	host: 'smtp.ethereal.email',
 	port: 587,
 	auth: {
@@ -13,3 +13,8 @@ export const transporter = nodemailer.createTransport({
 		rejectUnauthorized: false
 	}
 })
+
+console.log((process.env.TWILIO_ACCOUNT_ID, process.env.TWILIO_AUTH_TOKEN))
+export const smsClient = twilio(process.env.TWILIO_ACCOUNT_ID, process.env.TWILIO_AUTH_TOKEN)
+
+

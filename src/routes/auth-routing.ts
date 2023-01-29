@@ -6,7 +6,7 @@ import { UserModel } from "../models/user-model-mongo";
 import { userInfo } from "os";
 import User from "../models/user";
 import { config } from "dotenv";
-import { transporter } from "../mailer/mailer";
+import { mailClient } from "../mailer/mailer";
 
 
 const authRouter = express.Router();
@@ -57,7 +57,7 @@ authRouter.post("/register", passport.authenticate("signupStrategy", {
 	try {
 		if(req.success) {
 			//SEND MAIL TO ADMIN
-			transporter.sendMail({
+			mailClient.sendMail({
 				from: "server",
 				to: process.env.ADMIN_MAIL,
 				subject: "NEW USER",

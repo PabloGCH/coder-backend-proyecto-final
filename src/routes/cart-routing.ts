@@ -25,7 +25,8 @@ cartRouter.post("/", isAuthenticated, (req:any, res) => {
 
 cartRouter.put("/order/:id", isAuthenticated, (req:any, res) => {
 	let {id} = req.params;
-	cartManager.orderCart(id, req.session.user.username).then((result :Response) => {
+	let user = req.session.user
+	cartManager.orderCart(id, user.username, user.phone).then((result :Response) => {
 		res.send(result);
 	})
 })
