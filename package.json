@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "dist/index.js",
 	"scripts": {
-		"start": "ts-node --max-old-space-size=8192 src/server.ts",
+		"start": "ts-node --max-old-space-size=4000 src/server.ts",
 		"test": "nodemon src/server.ts"
 	},
 	"repository": {
