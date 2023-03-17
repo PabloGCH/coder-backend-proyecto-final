@@ -1,5 +1,6 @@
-interface Response {
-	response :any,
+interface HTTPResponse {
+	data :any,
+    message :string,
 	success :boolean
 }
-export default Response;
+export default HTTPResponse;

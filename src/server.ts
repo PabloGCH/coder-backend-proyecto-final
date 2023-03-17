@@ -11,20 +11,18 @@ dotenv.config()
 
 //Route imports
 //==========================================================
-import productsRouter from "./routes/products-routing";
-import cartRouter from "./routes/cart-routing";
-import siteRouter from "./routes/site-routing";
+
 import path from "path";
 
 //Interfaces
 //==========================================================
 import { UserModel } from "./models/user-model-mongo";
-import authRouter from "./routes/auth-routing";
 
 //Config import
 //==========================================================
 import { config } from "./config/config";
 import { errorLogger, infoLogger, warningLogger } from "./logger/logger";
+import router from "./routes/router";
 
 
 
@@ -61,15 +59,8 @@ passport.deserializeUser((id, done)=>{
 	})
 })
 
-//Sub routers
-//==========================================================
-app.use("/api/products", productsRouter);
-app.use("/api/cart", cartRouter);
-app.use("/api/auth", authRouter);
-app.use("/site", siteRouter);
-app.get("/", (req, res) => {
-	res.redirect("/site/home");
-})
+//ROUTER
+app.use(router)
 
 mongoose.connect(config.mongo.ulr||"").then(
 	() => {
