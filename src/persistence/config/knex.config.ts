@@ -1,5 +1,5 @@
 import knex, { Knex } from "knex";
-import { errorLogger, logger } from "../../services/logger.service";
+import { errorLogger, infoLogger } from "../../services/logger.service";
 import { MessageSQLTable } from "../models/message.sql.table";
 import { ProductSQLTable } from "../models/product.sql.table";
 import { sqloptions } from "./mysqlconfig";
@@ -30,7 +30,7 @@ export class SQLDatabaseConnection {
                 if(!exists) {
                     SQLDatabaseConnection.database.schema.createTable(table.name, table.schema)
                     .then(() => {
-                        logger.info(`Table ${table.name} created because it didn't exist`);
+                        infoLogger.info(`Table ${table.name} created because it didn't exist`);
                     })
                 }
             });
@@ -45,7 +45,7 @@ export class SQLDatabaseConnection {
                 config = sqloptions;
             if(config) {
                 SQLDatabaseConnection.database = knex(config);
-                logger.info(`Connected to ${databaseName} database`);
+                infoLogger.info(`Connected to ${databaseName} database`);
                 this.createTableIfNotExists();
                 return;
             }

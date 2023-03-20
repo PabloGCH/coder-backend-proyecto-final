@@ -5,7 +5,9 @@
 	"main": "dist/index.js",
 	"scripts": {
 		"start": "ts-node src/server.ts",
-		"watch": "nodemon src/server.ts"
+		"watch": "nodemon src/server.ts",
+		"start-mongo": "ts-node src/server.ts -p 4000 -d MONGO",
+		"start-sqlite": "ts-node src/server.ts -p 4000 -d SQLITE"
 	},
 	"repository": {
 		"type": "git",

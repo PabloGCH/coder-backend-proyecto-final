@@ -1,4 +1,4 @@
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
 import { DbClient } from "../dbclient";
 
 
@@ -12,7 +12,9 @@ export class MongoClient implements DbClient{
         return newObject;
     }
     public async delete(id: number) :Promise<void> {
-        await this.model.findByIdAndDelete(id);
+        let object = await this.model.findByIdAndDelete(id);
+        return object;
+
     }
     public async getObjects() :Promise<any[]> {
         let objects = await this.model.find({});

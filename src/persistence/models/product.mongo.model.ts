@@ -9,7 +9,15 @@ const schema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    imgUrl: {
+    imgURL: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    category: {
         type: String,
         required: true
     }

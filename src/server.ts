@@ -16,12 +16,12 @@ import path from "path";
 
 //Interfaces
 //==========================================================
-import { UserModel } from "./models/user-model-mongo";
+//import { UserModel } from "./models/user-model-mongo";
 
 //Config import
 //==========================================================
 import { config } from "./config/config";
-import { errorLogger, infoLogger, warningLogger } from "./logger/logger";
+import { errorLogger, infoLogger, warningLogger } from "./services/logger.service";
 import router from "./routes/router";
 
 
@@ -53,10 +53,12 @@ passport.serializeUser((user :any,done)=>{
 	done(null,user.id);
 })
 passport.deserializeUser((id, done)=>{
+    /*
 	UserModel.findById(id, (err:any, userFound :any) => {
 		if(err) return done(err);
 		return done(null, userFound);
 	})
+    */
 })
 
 //ROUTER
