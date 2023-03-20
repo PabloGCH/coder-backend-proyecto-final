@@ -6,6 +6,7 @@ export class ProductDTO {
     description: string;
     category: string;
     constructor(object :any) {
+        console.log("ProductDTO: constructor", object);
         if (!object) { throw "ProductDTO: object is null or undefined";}
         if (!object.id && !object._id) { throw "ProductDTO: object.id is null or undefined";}
         if (!object.name) { throw "ProductDTO: object.name is null or undefined";}

@@ -1,7 +1,7 @@
 import { Socket, Server as SocketServer} from "socket.io";
 import { MANAGERTYPE } from "../persistence/enums/managerType.enum";
 import { createManager } from "../persistence/managerFactory";
-import { errorLogger, logger } from "./logger.service";
+import { errorLogger, infoLogger } from "./logger.service";
 
 const productManager = createManager(MANAGERTYPE.PRODUCTS);
 const messageManager = createManager(MANAGERTYPE.MESSAGES);
@@ -12,7 +12,7 @@ export class SocketService {
     public connect(server :any) {
         if(!SocketService.io) {
             SocketService.io = new SocketServer(server);
-            logger.info("Socket server initialized")
+            infoLogger.info("Socket server initialized")
             this.startConnectionEvents();
             return;
         }
@@ -25,16 +25,10 @@ export class SocketService {
             throw new Error("Socket server not initialized")
         }
         SocketService.io.on("connection", async (socket :Socket) => {
-            if(productManager === null) {
-                errorLogger.error("Cannot start connection events. Product manager not created");
-                throw new Error("Cannot start connection events. Product manager not created");
-            }
             if(messageManager === null) {
                 errorLogger.error("Cannot start connection events. Message manager not created");
                 throw new Error("Cannot start connection events. Message manager not created");
             }
-            let products = await productManager.getObjects();
-            socket.emit("products", {products: products})
             let messages = await messageManager.getObjects();
             socket.emit("messages", {messages: messages})
         })

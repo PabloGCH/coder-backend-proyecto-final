@@ -12,15 +12,18 @@ export class SQLClient implements DbClient {
         this.database = SQLDatabaseConnection.getInstance().getDatabase();
     }
     public async save(object: any): Promise<any> {
-        let newObject = await this.database(this.tableName).insert(object);
+        let newObjectID = await this.database(this.tableName).insert(object);
+        let newObject = await this.database(this.tableName).first({id: newObjectID});
         return newObject;
     }
     public async update(id: string | number, object: any): Promise<any> {
-        let newObject = await this.database(this.tableName).first({id: id}).update(object);
+        let newObjectID = await this.database(this.tableName).first({id: id}).update(object);
+        let newObject = await this.database(this.tableName).first({id: newObjectID});
         return newObject;
     }
-    public async delete(id: number): Promise<void> {
-        await this.database(this.tableName).where({id: id}).del();
+    public async delete(id: number): Promise<any> {
+        let object = await this.database(this.tableName).where({id: id}).del();
+        return object;
     }
     public async getObjects(): Promise<any[]> {
         let objects = await this.database(this.tableName).select();

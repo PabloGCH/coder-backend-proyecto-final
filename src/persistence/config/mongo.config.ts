@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
-import { logger } from "../../services/logger.service";
+import { infoLogger } from "../../services/logger.service";
 
 export function initMongoDb() {
     //CONNECTS TO MONGO
     mongoose.set("strictQuery", false);
-    mongoose.connect(process.env.MONGODB_URL||"").then(
+    mongoose.connect(process.env.DB_MONGO_URL||"").then(
         () => {
-            logger.info("Connected to MongoDB");
+            infoLogger.info("Connected to MongoDB");
         },
         err => {
             console.log(err)

@@ -2,10 +2,6 @@
 import cluster from "cluster";
 import os from "os";
 import express from "express";
-import passport from "passport";
-import session from "express-session";
-import MongoStore from "connect-mongo";
-import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config()
 
@@ -20,9 +16,11 @@ import path from "path";
 
 //Config import
 //==========================================================
-import { config } from "./config/config";
+import { Config } from "./config/config";
 import { errorLogger, infoLogger, warningLogger } from "./services/logger.service";
 import router from "./routes/router";
+import { initMongoDb } from "./persistence/config/mongo.config";
+import { SQLDatabaseConnection } from "./persistence/config/knex.config";
 
 
 
@@ -37,44 +35,16 @@ const NUMBEROFCORES = os.cpus().length;
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, '../public')));
-//Passport config
-app.use(session({
-	store: MongoStore.create({mongoUrl: config.mongo.ulr}),
-	secret: "dfvartg4wfqR3EFRQ3",
-	resave: false,
-	saveUninitialized: false,
-	cookie: {
-		maxAge: 1000 * 60 * 10 // 1 segundo * 60 * 10 = 10 minutos
-	}
-}))
-app.use(passport.initialize());
-app.use(passport.session());
-passport.serializeUser((user :any,done)=>{
-	done(null,user.id);
-})
-passport.deserializeUser((id, done)=>{
-    /*
-	UserModel.findById(id, (err:any, userFound :any) => {
-		if(err) return done(err);
-		return done(null, userFound);
-	})
-    */
-})
+
+
 
 //ROUTER
 app.use(router)
 
-mongoose.connect(config.mongo.ulr||"").then(
-	() => {
-		infoLogger.info("DB connection successful")
-	},
-	err => {
-		errorLogger.error({
-			message: "DB connection failed",
-			error: err
-		})
-	}
-)
+//DATABASE CONNECTIONS
+initMongoDb(); //MONGO WILL ALWAYS BE CONNECTED, BECAUSE IT IS USED FOR AUTHENTICATION
+if(Config.DATABASE_NAME === "SQLITE" || Config.DATABASE_NAME === "SQL")
+    SQLDatabaseConnection.getInstance().connect(Config.DATABASE_NAME);
 
 if(process.env.MODE == "CLUSTER" && cluster.isPrimary) {
 	infoLogger.info("Server initialized on cluster mode")
@@ -89,6 +59,7 @@ if(process.env.MODE == "CLUSTER" && cluster.isPrimary) {
 		cluster.fork();
 	})
 } else {
+    Config.configServer(app);
 	if(process.env.MODE == "FORK") {infoLogger.info("Server initialized on fork mode")}
 	app.listen(process.env.PORT, () => {
 		if(process.env.MODE == "CLUSTER") {infoLogger.info("New server initialized on port " + process.env.PORT)}

@@ -5,10 +5,10 @@ import { DbClient } from "../persistence/dbclient";
 import { Product } from "../models/interfaces/product.interface";
 import { errorLogger, infoLogger } from "../services/logger.service";
 import { ProductDTO } from "../models/DTOs/product.dto";
-const productManager :DbClient|null = createManager(MANAGERTYPE.PRODUCTS);
 
 export const getAllProducts = (req :Request, res :Response) => {
     try {
+        const productManager :DbClient|null = createManager(MANAGERTYPE.PRODUCTS);
         productManager?.getObjects().then((products :Product[]) => {
             let productsDTO = products.map((product :Product) => {
                 return new ProductDTO(product);
@@ -33,6 +33,7 @@ export const getAllProducts = (req :Request, res :Response) => {
 
 export const getProductById = (req :Request, res :Response) => {
     try {
+        const productManager :DbClient|null = createManager(MANAGERTYPE.PRODUCTS);
         let {id} = req.params;
         productManager?.getObject(id).then((product :Product) => {
             let productDTO = new ProductDTO(product);
@@ -57,6 +58,7 @@ export const getProductById = (req :Request, res :Response) => {
 
 export const saveProduct = (req :Request, res :Response) => {
     try {
+        const productManager :DbClient|null = createManager(MANAGERTYPE.PRODUCTS);
         productManager?.save(req.body).then((product :Product|null) => {
             let productDTO = new ProductDTO(product);
             res.send({
@@ -82,6 +84,7 @@ export const saveProduct = (req :Request, res :Response) => {
 
 export const editProduct = (req :Request, res :Response) => {
     try {
+        const productManager :DbClient|null = createManager(MANAGERTYPE.PRODUCTS);
         let {id} = req.params;
         productManager?.update(id, req.body).then((product :Product) => {
             let productDTO = new ProductDTO(product);
@@ -108,6 +111,7 @@ export const editProduct = (req :Request, res :Response) => {
 
 export const deleteProduct = (req :Request, res :Response) => {
     try {
+        const productManager :DbClient|null = createManager(MANAGERTYPE.PRODUCTS);
         let {id} = req.params;
         productManager?.delete(id).then((product :Product|null) => {
             let productDTO = new ProductDTO(product);
