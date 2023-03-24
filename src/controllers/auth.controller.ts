@@ -65,6 +65,7 @@ export const loginController = (req :Request | any, res :Response) => {
                 if(userFound) {
                     if(bcrypt.compareSync(body.password, userFound.password)) {
                         req.session.user = {
+                            id: userFound._id,
                             username: body.username,
                             password: body.password
                         }

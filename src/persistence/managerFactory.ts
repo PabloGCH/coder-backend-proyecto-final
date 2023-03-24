@@ -6,6 +6,7 @@ import { DbClient } from "./dbclient";
 import { infoLogger } from "../services/logger.service";
 import knex, { Knex } from "knex";
 import { args } from "../config/minimist/minimist.config";
+import { CartMongoManager } from "./managers/cart.mongo.manager";
 
 
 const database :Knex | null = args.d == "SQLITE" ? knex(sqliteconfig) : null;
@@ -20,6 +21,16 @@ export const createManager = (managerType :number) :DbClient|null => {
         if(args.d === "SQLITE" && database) {
             infoLogger.info({message: "Creating a new manager", type: "product", db: "sqlite"});
             return new ProductSQLManager;
+        }
+    }
+    if(managerType === MANAGERTYPE.CARTS) {
+        if(args.d === "MONGO") {
+            infoLogger.info({message: "Creating a new manager", type: "carts", db: "mongo"});
+            return new CartMongoManager;
+        }
+        if(args.d === "SQLITE" && database) {
+            infoLogger.info({message: "Creating a new manager", type: "carts", db: "sqlite"});
+            //return new CartSQLManager;
         }
     }
     return null;

@@ -1,18 +1,17 @@
 import express from "express";
 import path from "path";
-import Response from "../models/response";
-import CartManager from "../daos/carts/cart-mongo";
-import Cart from "../models/cart";
 import isAuthenticated from "../middlewares/is-authenticated";
+import { getCart } from "../controllers/carts.controller";
 
 //const CARTFILEDIR = path.join(__dirname, "../assets/carts.json");
 //const PRODUCTFILEDIR = path.join(__dirname, "../assets/products.json");
 
 //const cartManager :CartManager = new CartManager(CARTFILEDIR, PRODUCTFILEDIR);
-const cartManager :CartManager = new CartManager();
-
 var cartRouter = express.Router();
 
+cartRouter.post("/", isAuthenticated, getCart);
+
+/*
 //Consigue un carrito activo, si no existe lo crea
 cartRouter.post("/", isAuthenticated, (req:any, res) => {
 	const userId = req.session.user.id;
@@ -51,6 +50,6 @@ cartRouter.delete("/:id/products/:id_prod", isAuthenticated, (req, res) => {
 		res.send(result);
 	})
 });
-
+*/
 
 export default cartRouter;

@@ -5,7 +5,7 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    productIDs: {
+    products: {
         type: [String],
         required: true
     },

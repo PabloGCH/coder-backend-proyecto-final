@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const collection = "product";
+const collection = "products";
 const schema = new mongoose.Schema({
     name: {
         type: String,
