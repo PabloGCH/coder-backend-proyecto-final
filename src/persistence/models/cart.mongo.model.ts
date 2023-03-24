@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const collection = "carts";
 const schema = new mongoose.Schema({
-    userId: { //User that owns the cart
+    userId: {  
         type: String,
         required: true
     },

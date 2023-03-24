@@ -7,6 +7,8 @@ export class ProductDTO {
     imgURL: string = "";
     description: string = "";
     category: string = "";
+    createdAt: Date|null = null;
+    updatedAt: Date|null = null;
     constructor(object :any) {
         try {
             if (!object) { throw "ProductDTO: object is null or undefined";}
@@ -22,6 +24,8 @@ export class ProductDTO {
             this.imgURL = object.imgURL;
             this.description = object.description;
             this.category = object.category;
+            this.createdAt = (object.created_at && new Date(object.created_at)) || null;
+            this.updatedAt = (object.updated_at && new Date(object.updated_at)) || null;
         } catch (error) {
             errorLogger.error(error);
         }

@@ -25,9 +25,7 @@ export class SQLClient implements DbClient {
     public async update(id: string | number, object: any): Promise<any> {
         try {
             let newObjectID :any = await this.database(this.tableName).where({id: id}).update(object);
-            console.log("OBJECT ID", newObjectID);
             let newObject = await this.database(this.tableName).where({id: newObjectID}).first();
-            console.log("OBJECT", newObject);
             return newObject;
         } catch (error) {
             errorLogger.error(error);
@@ -66,6 +64,7 @@ export class SQLClient implements DbClient {
             return null;
         }
     }
+
     public async getObjectsByIds(ids: string[] | number[]): Promise<any[]> {
         return [];
     }

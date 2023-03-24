@@ -7,4 +7,5 @@ export const ProductSQLTable = (table :Knex.TableBuilder) =>{
     table.string("imgURL", 1500);
     table.string("description", 1500);
     table.string("category", 20);
+    table.timestamps(true, true);
 }
