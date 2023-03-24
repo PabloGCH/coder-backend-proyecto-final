@@ -52,18 +52,18 @@ export class CartDTO {
             const productIds = await cartManager?.getManyToManyRelation(this.id, "products");
             const products = await productManager?.getObjectsByIds(productIds) || [];
             products.forEach((product :any) => {
+                const newProduct = {
+                    quantity: 0,
+                    product: new ProductDTO(product)
+                }
                 productIds.forEach((productId :string|number) => {
-                    const newProduct = {
-                        quantity: 0,
-                        product: new ProductDTO(product)
-                    }
                     if (product.id === productId) {
                         newProduct.quantity++;
                     }
-                    this.products.push(newProduct);
                 });
+                this.products.push(newProduct);
             });
-            
+
 
             //const relatedObjects = await this.database(relation).whereIn('id', ids);
         }

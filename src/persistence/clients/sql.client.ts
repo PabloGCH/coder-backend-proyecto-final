@@ -109,11 +109,27 @@ export class SQLClient implements DbClient {
 
 
     public async deleteManyToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {
-        await this.database(this.tableName + '_' + relation + '_relation').where({
+        const relationRow = await this.database(this.tableName + '_' + relation + '_relation').where({
+            [this.tableName + '_id']: id,
+            [relation + '_id']: relatedId
+        }).first();
+        if (relationRow) {
+            await this.database(this.tableName + '_' + relation + '_relation').where('id', relationRow.id).first().del();
+        }
+        const object = await this.database(this.tableName).where({id: id}).first();
+
+        return object;
+    }
+}
+
+
+
+/*
+         await this.database(this.tableName + '_' + relation + '_relation').where({
             [this.tableName + '_id']: id,
             [relation + '_id']: relatedId
         }).first().del();
         const object = await this.database(this.tableName).where({id: id}).first();
         return object;
-    }
-}
+ 
+ * */

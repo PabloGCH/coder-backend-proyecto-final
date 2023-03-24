@@ -967,3 +967,17 @@
     at Runner.ensureConnection (/home/pablo/curso/coder-backend-proyecto-final/node_modules/knex/lib/execution/runner.js:300:20)
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
     at async Runner.run (/home/pablo/curso/coder-backend-proyecto-final/node_modules/knex/lib/execution/runner.js:30:19)
+[2023-03-24T20:34:49.919] [ERROR] errors - Error: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [userId] query: select * from `carts` where `userId` = ? and `status` = ? limit ?
+    at QueryCompiler_SQLite3.toSQL (/home/pablo/curso/coder-backend-proyecto-final/node_modules/knex/lib/query/querycompiler.js:110:13)
+    at QueryBuilder_SQLite3.toSQL (/home/pablo/curso/coder-backend-proyecto-final/node_modules/knex/lib/query/querybuilder.js:83:44)
+    at ensureConnectionCallback (/home/pablo/curso/coder-backend-proyecto-final/node_modules/knex/lib/execution/internal/ensure-connection-callback.js:4:30)
+    at Runner.ensureConnection (/home/pablo/curso/coder-backend-proyecto-final/node_modules/knex/lib/execution/runner.js:300:20)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Runner.run (/home/pablo/curso/coder-backend-proyecto-final/node_modules/knex/lib/execution/runner.js:30:19)
+[2023-03-24T20:48:28.051] [ERROR] errors - Error: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [userId] query: select * from `carts` where `userId` = ? and `status` = ? limit ?
+    at QueryCompiler_SQLite3.toSQL (/home/pablo/curso/coder-backend-proyecto-final/node_modules/knex/lib/query/querycompiler.js:110:13)
+    at QueryBuilder_SQLite3.toSQL (/home/pablo/curso/coder-backend-proyecto-final/node_modules/knex/lib/query/querybuilder.js:83:44)
+    at ensureConnectionCallback (/home/pablo/curso/coder-backend-proyecto-final/node_modules/knex/lib/execution/internal/ensure-connection-callback.js:4:30)
+    at Runner.ensureConnection (/home/pablo/curso/coder-backend-proyecto-final/node_modules/knex/lib/execution/runner.js:300:20)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Runner.run (/home/pablo/curso/coder-backend-proyecto-final/node_modules/knex/lib/execution/runner.js:30:19)
