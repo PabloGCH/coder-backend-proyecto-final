@@ -299,3 +299,161 @@
   },
   _message: 'carts validation failed'
 }
+[2023-03-24T14:43:12.173] [ERROR] errors - Error: carts validation failed: userId: Path `userId` is required.
+    at ValidationError.inspect (/home/pablo/curso/coder-backend-proyecto-final/node_modules/mongoose/lib/error/validation.js:50:26)
+    at formatValue (node:internal/util/inspect:790:19)
+    at inspect (node:internal/util/inspect:350:10)
+    at formatWithOptionsInternal (node:internal/util/inspect:2241:40)
+    at Object.format (node:internal/util/inspect:2098:10)
+    at basicLayout (/home/pablo/curso/coder-backend-proyecto-final/node_modules/log4js/lib/layouts.js:65:52)
+    at app (/home/pablo/curso/coder-backend-proyecto-final/node_modules/log4js/lib/appenders/file.js:98:23)
+    at /home/pablo/curso/coder-backend-proyecto-final/node_modules/log4js/lib/log4js.js:43:5
+    at Array.forEach (<anonymous>)
+    at sendLogEventToAppender (/home/pablo/curso/coder-backend-proyecto-final/node_modules/log4js/lib/log4js.js:42:21) {
+  errors: {
+    userId: ValidatorError: Path `userId` is required.
+        at validate (/home/pablo/curso/coder-backend-proyecto-final/node_modules/mongoose/lib/schematype.js:1346:13)
+        at SchemaString.SchemaType.doValidate (/home/pablo/curso/coder-backend-proyecto-final/node_modules/mongoose/lib/schematype.js:1330:7)
+        at /home/pablo/curso/coder-backend-proyecto-final/node_modules/mongoose/lib/document.js:2877:18
+        at processTicksAndRejections (node:internal/process/task_queues:78:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'userId',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    }
+  },
+  _message: 'carts validation failed'
+}
+[2023-03-24T14:43:28.567] [ERROR] errors - Error: carts validation failed: userId: Path `userId` is required.
+    at ValidationError.inspect (/home/pablo/curso/coder-backend-proyecto-final/node_modules/mongoose/lib/error/validation.js:50:26)
+    at formatValue (node:internal/util/inspect:790:19)
+    at inspect (node:internal/util/inspect:350:10)
+    at formatWithOptionsInternal (node:internal/util/inspect:2241:40)
+    at Object.format (node:internal/util/inspect:2098:10)
+    at basicLayout (/home/pablo/curso/coder-backend-proyecto-final/node_modules/log4js/lib/layouts.js:65:52)
+    at app (/home/pablo/curso/coder-backend-proyecto-final/node_modules/log4js/lib/appenders/file.js:98:23)
+    at /home/pablo/curso/coder-backend-proyecto-final/node_modules/log4js/lib/log4js.js:43:5
+    at Array.forEach (<anonymous>)
+    at sendLogEventToAppender (/home/pablo/curso/coder-backend-proyecto-final/node_modules/log4js/lib/log4js.js:42:21) {
+  errors: {
+    userId: ValidatorError: Path `userId` is required.
+        at validate (/home/pablo/curso/coder-backend-proyecto-final/node_modules/mongoose/lib/schematype.js:1346:13)
+        at SchemaString.SchemaType.doValidate (/home/pablo/curso/coder-backend-proyecto-final/node_modules/mongoose/lib/schematype.js:1330:7)
+        at /home/pablo/curso/coder-backend-proyecto-final/node_modules/mongoose/lib/document.js:2877:18
+        at processTicksAndRejections (node:internal/process/task_queues:78:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'userId',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    }
+  },
+  _message: 'carts validation failed'
+}
+[2023-03-24T14:45:07.496] [ERROR] errors - Error: carts validation failed: userId: Path `userId` is required.
+    at ValidationError.inspect (/home/pablo/curso/coder-backend-proyecto-final/node_modules/mongoose/lib/error/validation.js:50:26)
+    at formatValue (node:internal/util/inspect:790:19)
+    at inspect (node:internal/util/inspect:350:10)
+    at formatWithOptionsInternal (node:internal/util/inspect:2241:40)
+    at Object.format (node:internal/util/inspect:2098:10)
+    at basicLayout (/home/pablo/curso/coder-backend-proyecto-final/node_modules/log4js/lib/layouts.js:65:52)
+    at app (/home/pablo/curso/coder-backend-proyecto-final/node_modules/log4js/lib/appenders/file.js:98:23)
+    at /home/pablo/curso/coder-backend-proyecto-final/node_modules/log4js/lib/log4js.js:43:5
+    at Array.forEach (<anonymous>)
+    at sendLogEventToAppender (/home/pablo/curso/coder-backend-proyecto-final/node_modules/log4js/lib/log4js.js:42:21) {
+  errors: {
+    userId: ValidatorError: Path `userId` is required.
+        at validate (/home/pablo/curso/coder-backend-proyecto-final/node_modules/mongoose/lib/schematype.js:1346:13)
+        at SchemaString.SchemaType.doValidate (/home/pablo/curso/coder-backend-proyecto-final/node_modules/mongoose/lib/schematype.js:1330:7)
+        at /home/pablo/curso/coder-backend-proyecto-final/node_modules/mongoose/lib/document.js:2877:18
+        at processTicksAndRejections (node:internal/process/task_queues:78:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'userId',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    }
+  },
+  _message: 'carts validation failed'
+}
+[2023-03-24T14:45:20.851] [ERROR] errors - Error: carts validation failed: userId: Path `userId` is required.
+    at ValidationError.inspect (/home/pablo/curso/coder-backend-proyecto-final/node_modules/mongoose/lib/error/validation.js:50:26)
+    at formatValue (node:internal/util/inspect:790:19)
+    at inspect (node:internal/util/inspect:350:10)
+    at formatWithOptionsInternal (node:internal/util/inspect:2241:40)
+    at Object.format (node:internal/util/inspect:2098:10)
+    at basicLayout (/home/pablo/curso/coder-backend-proyecto-final/node_modules/log4js/lib/layouts.js:65:52)
+    at app (/home/pablo/curso/coder-backend-proyecto-final/node_modules/log4js/lib/appenders/file.js:98:23)
+    at /home/pablo/curso/coder-backend-proyecto-final/node_modules/log4js/lib/log4js.js:43:5
+    at Array.forEach (<anonymous>)
+    at sendLogEventToAppender (/home/pablo/curso/coder-backend-proyecto-final/node_modules/log4js/lib/log4js.js:42:21) {
+  errors: {
+    userId: ValidatorError: Path `userId` is required.
+        at validate (/home/pablo/curso/coder-backend-proyecto-final/node_modules/mongoose/lib/schematype.js:1346:13)
+        at SchemaString.SchemaType.doValidate (/home/pablo/curso/coder-backend-proyecto-final/node_modules/mongoose/lib/schematype.js:1330:7)
+        at /home/pablo/curso/coder-backend-proyecto-final/node_modules/mongoose/lib/document.js:2877:18
+        at processTicksAndRejections (node:internal/process/task_queues:78:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'userId',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    }
+  },
+  _message: 'carts validation failed'
+}
+[2023-03-24T14:46:02.201] [ERROR] errors - CastError: Cast to string failed for value "{
+  userId: '641dd364289ed5a1f17c8161',
+  username: 'test',
+  password: 'asd'
+}" (type Object) at path "userId" for model "carts"
+    at model.Query.exec (/home/pablo/curso/coder-backend-proyecto-final/node_modules/mongoose/lib/query.js:4891:21)
+    at CartMongoManager.<anonymous> (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/clients/mongo.client.ts:33:60)
+    at Generator.next (<anonymous>)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/persistence/clients/mongo.client.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/clients/mongo.client.ts:4:12)
+    at CartMongoManager.getObjectByFields (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/clients/mongo.client.ts:48:16)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/controllers/carts.controller.ts:17:57
+    at Generator.next (<anonymous>)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/controllers/carts.controller.ts:8:71 {
+  messageFormat: undefined,
+  stringValue: '"{\n' +
+    "  userId: '641dd364289ed5a1f17c8161',\n" +
+    "  username: 'test',\n" +
+    "  password: 'asd'\n" +
+    '}"',
+  kind: 'string',
+  value: {
+    userId: '641dd364289ed5a1f17c8161',
+    username: 'test',
+    password: 'asd'
+  },
+  path: 'userId',
+  reason: null,
+  valueType: 'Object'
+}
+[2023-03-24T14:46:24.078] [ERROR] errors - CastError: Cast to string failed for value "{ id: '641dd364289ed5a1f17c8161', username: 'test', password: 'asd' }" (type Object) at path "userId" for model "carts"
+    at model.Query.exec (/home/pablo/curso/coder-backend-proyecto-final/node_modules/mongoose/lib/query.js:4891:21)
+    at CartMongoManager.<anonymous> (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/clients/mongo.client.ts:33:60)
+    at Generator.next (<anonymous>)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/persistence/clients/mongo.client.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/clients/mongo.client.ts:4:12)
+    at CartMongoManager.getObjectByFields (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/clients/mongo.client.ts:48:16)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/controllers/carts.controller.ts:17:57
+    at Generator.next (<anonymous>)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/controllers/carts.controller.ts:8:71 {
+  messageFormat: undefined,
+  stringValue: `"{ id: '641dd364289ed5a1f17c8161', username: 'test', password: 'asd' }"`,
+  kind: 'string',
+  value: { id: '641dd364289ed5a1f17c8161', username: 'test', password: 'asd' },
+  path: 'userId',
+  reason: null,
+  valueType: 'Object'
+}

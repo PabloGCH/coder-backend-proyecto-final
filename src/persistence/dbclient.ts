@@ -6,7 +6,13 @@ export interface DbClient {
     delete(id :string | number) :Promise<any>,
     getObjects() :Promise<any[]>,
     getObject(id: string | number) :Promise<any>,
-    getObjectsByField(field :string, value :any) :Promise<any[]>,
+    /*FIELDS SHOULD HAVE LOOK LIKE:
+    * {
+    *  field1: value1,
+    *  field2: value2
+    * }*/
+    getObjectByFields(fields :any) :Promise<any>,
+
 
     /*RELATIONS*/
     /*NOTE: IN CASE OF RELATIONAL DATABASES, AN INTERMEDIATE TABLE

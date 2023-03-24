@@ -9,16 +9,14 @@ import CART_STATUS from "../persistence/enums/cartStatus.enum";
 
 export const getCart = async (req :Request | any, res :Response) => {
     try {
-        const userId = req?.session?.id;
+        const userId = req?.session?.user?.id;
         const cartManager = createManager(MANAGERTYPE.CARTS);
 
-        //SHOULD LOOK FOR A CART WITH THE USER ID
-        const cartFound :Cart|null = null;
-
+        //SHOULD LOOK FOR AN ACTIVE CART WITH THE USER ID
+        const cartFound :Cart|null = await cartManager?.getObjectByFields({userId: userId, status: CART_STATUS.ACTIVE});
 
         if (cartFound) {
-            console.log(cartFound);
-            res.send({success : true, message: "Cart already exists, existing cart retrieved", cart: cart})
+            res.send({success : true, message: "Cart already exists, existing cart retrieved", cart: cartFound})
         } else {
             const newCart :Cart = await cartManager?.save({
                 userId: userId,
