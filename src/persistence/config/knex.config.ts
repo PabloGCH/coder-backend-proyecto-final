@@ -1,6 +1,5 @@
 import knex, { Knex } from "knex";
 import { errorLogger, infoLogger } from "../../services/logger.service";
-import { MessageSQLTable } from "../models/message.sql.table";
 import { ProductSQLTable } from "../models/product.sql.table";
 import { sqloptions } from "./mysqlconfig";
 import { sqliteconfig } from "./sqliteconfig";
@@ -21,9 +20,6 @@ export class SQLDatabaseConnection {
         let tables = [{
             name: "products",
             schema: ProductSQLTable
-        }, {
-            name: "messages",
-            schema: MessageSQLTable
         }];
         tables.forEach((table) => {
             SQLDatabaseConnection.database.schema.hasTable(table.name).then((exists) => {

@@ -13,8 +13,6 @@ const cartManager :CartManager = new CartManager();
 
 var cartRouter = express.Router();
 
-
-
 //Consigue un carrito activo, si no existe lo crea
 cartRouter.post("/", isAuthenticated, (req:any, res) => {
 	const userId = req.session.user.id;
@@ -22,7 +20,6 @@ cartRouter.post("/", isAuthenticated, (req:any, res) => {
 		res.send(result);
 	})
 });
-
 cartRouter.put("/order/:id", isAuthenticated, (req:any, res) => {
 	let {id} = req.params;
 	let user = req.session.user
@@ -30,31 +27,24 @@ cartRouter.put("/order/:id", isAuthenticated, (req:any, res) => {
 		res.send(result);
 	})
 })
-
-
 cartRouter.delete("/:id", isAuthenticated, (req, res) => {
 	let {id} = req.params;
 	cartManager.deleteById(id).then((result :Response) => {
 		res.send(result);
 	})
 });
-
 cartRouter.get("/:id/products", isAuthenticated, (req, res) => {
 	let {id} = req.params;
 	cartManager.getProductsById(id).then((result :Response) => {
 		res.send(result);
 	})
 });
-
-
 cartRouter.post("/:id/products/:id_prod", isAuthenticated, (req, res) => {
 	let {id, id_prod} = req.params;
 	cartManager.addProduct(id, id_prod).then((result :Response) => {
 		res.send(result);
 	})
 });
-
-
 cartRouter.delete("/:id/products/:id_prod", isAuthenticated, (req, res) => {
 	let {id, id_prod} = req.params;
 	cartManager.removeProduct(id, id_prod).then((result :Response) => {
