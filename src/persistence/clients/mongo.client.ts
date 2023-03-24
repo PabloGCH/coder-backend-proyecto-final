@@ -51,6 +51,18 @@ export class MongoClient implements DbClient{
     public async getManyToManyRelation(id: string | number, relation: string): Promise<any> {}
     public async deleteOneToOneRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
     public async deleteOneToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
-    public async deleteManyToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
+    public async deleteManyToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {
+        console.log(id, relation + '_ids', relatedId);
+        let object = await this.model.findById(id) || null;
+        if(object) {
+            let idsArr :string[] = object[relation + '_ids'].slice();
+            let delIndex = idsArr.findIndex((id) => id === relatedId);
+            idsArr.splice(delIndex, 1);
+            object[relation + '_ids'] = idsArr;
+            console.log("UPDATE OBJECT", object);
+        }
+        await this.model.findByIdAndUpdate(id, object);
+        return object;
+    }
 
 }

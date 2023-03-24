@@ -1,11 +1,24 @@
 import { createManager } from "../persistence/managerFactory";
 import { MANAGERTYPE } from "../persistence/enums/managerType.enum";
-import { DbClient } from "../persistence/dbclient";
 import { errorLogger, infoLogger } from "../services/logger.service";
 import { Cart } from "../persistence/interfaces/cart.interface";
 import { Request, Response } from "express";
 import CART_STATUS from "../persistence/enums/cartStatus.enum";
 import { CartDTO } from "../persistence/DTOs/cart.dto";
+
+
+export const removeProductFromCart = async (req :Request | any, res :Response) => {
+    try {
+        const cartManager = createManager(MANAGERTYPE.CARTS);
+        const {cartid, productid} = req.params;
+        await  cartManager?.deleteManyToManyRelation(cartid, 'products', productid);
+        const newCart = await cartManager?.getObject(cartid);
+        res.send({success : true, message: "Product removed from cart", data: new CartDTO(newCart)});
+    } catch (error) {
+        errorLogger.error(error);
+        res.send({success : false, message: "Failed to remove product from cart"})
+    }
+}
 
 
 export const orderCart = async (req :Request | any, res :Response) => {
