@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import isAuthenticated from "../middlewares/is-authenticated";
-import { getCart } from "../controllers/carts.controller";
+import { addProductToCart, getCart, orderCart } from "../controllers/carts.controller";
 
 //const CARTFILEDIR = path.join(__dirname, "../assets/carts.json");
 //const PRODUCTFILEDIR = path.join(__dirname, "../assets/products.json");
@@ -10,6 +10,8 @@ import { getCart } from "../controllers/carts.controller";
 var cartRouter = express.Router();
 
 cartRouter.post("/", isAuthenticated, getCart);
+cartRouter.put("/:cartid/:productid", isAuthenticated, addProductToCart);
+cartRouter.patch("/:cartid", isAuthenticated, orderCart);
 
 /*
 //Consigue un carrito activo, si no existe lo crea

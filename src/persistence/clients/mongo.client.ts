@@ -38,7 +38,14 @@ export class MongoClient implements DbClient{
 
     public async addOneToOneRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
     public async addOneToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
-    public async addManyToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
+
+    public async addManyToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {
+        //let object = await this.model.findOneAndUpdate({_id: id}, {$push: {[relation + '_ids']: relatedId}});
+        await this.model.updateOne({_id: id}, {$push: {[relation + '_ids']: relatedId}});
+        const object = await this.model.findOne({_id: id});
+        return object;
+    }
+
     public async getOneToOneRelation(id: string | number, relation: string): Promise<any> {}
     public async getOneToManyRelation(id: string | number, relation: string): Promise<any> {}
     public async getManyToManyRelation(id: string | number, relation: string): Promise<any> {}
