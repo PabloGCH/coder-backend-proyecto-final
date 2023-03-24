@@ -66,9 +66,12 @@ export class SQLClient implements DbClient {
             return null;
         }
     }
-
+    public async getObjectsByIds(ids: string[] | number[]): Promise<any[]> {
+        return [];
+    }
 
     public async getObjectByFields(fields: any) :Promise<any> {
+        return null;
     }
 
 

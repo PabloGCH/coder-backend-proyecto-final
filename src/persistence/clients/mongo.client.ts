@@ -34,6 +34,10 @@ export class MongoClient implements DbClient{
         console.log(object);
         return object;
     }
+    public async getObjectsByIds(ids: string[] | number[]): Promise<any[]> {
+        const objects = await this.model.find({_id: {$in: ids}});
+        return objects;
+    }
 
 
     public async addOneToOneRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}

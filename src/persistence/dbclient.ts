@@ -12,6 +12,7 @@ export interface DbClient {
     *  field2: value2
     * }*/
     getObjectByFields(fields :any) :Promise<any>,
+    getObjectsByIds(ids :string[] | number[]) :Promise<any[]>,
 
 
     /*RELATIONS*/
