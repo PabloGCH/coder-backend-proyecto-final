@@ -27,23 +27,25 @@ export function configurePassport(app: express.Application) {
         {
             passReqToCallback: true,
         },
-        (req, email, password, done) => {
-            UserModel.findOne({email: email}, (err:any, userFound:any) => {
-                if(err) return done(err);
+        async (req, username, password, done) => {
+            try {
+                let body = req.body;
+                let userFound = await UserModel.findOne({username: username});
                 if(userFound) {
-                    Object.assign(req, {success: false, message: "user already exists"})
-                    return done(null, userFound);
+                    throw {message: "User already exists"};
                 }
                 const newUser = {
-                    email: email,
-                    password: createHash(password)
+                    username: username,
+                    password: createHash(password),
+                    email: body.email,
+                    phone: body.phone
                 }
-                UserModel.create(newUser, (err, userCreated) => {
-                    if(err) return done(err, undefined, {message: "failed to register user"});
-                    Object.assign(req, {success: true,message: "User created"})
-                    return done(null, userCreated)
-                })
-            })
+                let userCreated = await UserModel.create(newUser);
+                return done(null, userCreated)
+            } catch (error) {
+                Object.assign(req, {error: error});
+                return done(new Error());
+            }
         }
     ));
 }

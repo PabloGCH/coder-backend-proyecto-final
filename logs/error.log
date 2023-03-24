@@ -53,3 +53,64 @@
 [2023-03-20T22:36:49.144] [ERROR] errors - ProductDTO: object is null or undefined
 [2023-03-20T22:38:15.381] [ERROR] errors - ProductDTO: object.id is null or undefined
 [2023-03-20T22:39:04.516] [ERROR] errors - ProductDTO: object.id is null or undefined
+[2023-03-20T23:11:46.287] [ERROR] errors - {
+  message: 'Failed to login user',
+  error: TypeError: Cannot read properties of undefined (reading 'user')
+      at /home/pablo/curso/coder-backend-proyecto-final/src/routes/auth.routing.ts:110:18
+      at Layer.handle [as handle_request] (/home/pablo/curso/coder-backend-proyecto-final/node_modules/express/lib/router/layer.js:95:5)
+      at next (/home/pablo/curso/coder-backend-proyecto-final/node_modules/express/lib/router/route.js:144:13)
+      at Route.dispatch (/home/pablo/curso/coder-backend-proyecto-final/node_modules/express/lib/router/route.js:114:3)
+      at Layer.handle [as handle_request] (/home/pablo/curso/coder-backend-proyecto-final/node_modules/express/lib/router/layer.js:95:5)
+      at /home/pablo/curso/coder-backend-proyecto-final/node_modules/express/lib/router/index.js:284:15
+      at Function.process_params (/home/pablo/curso/coder-backend-proyecto-final/node_modules/express/lib/router/index.js:346:12)
+      at next (/home/pablo/curso/coder-backend-proyecto-final/node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (/home/pablo/curso/coder-backend-proyecto-final/node_modules/express/lib/router/index.js:175:3)
+      at router (/home/pablo/curso/coder-backend-proyecto-final/node_modules/express/lib/router/index.js:47:12)
+}
+[2023-03-20T23:43:55.188] [ERROR] errors - {
+  message: 'Failed to login user',
+  error: TypeError: Cannot read properties of undefined (reading 'user')
+      at /home/pablo/curso/coder-backend-proyecto-final/src/routes/auth.routing.ts:79:18
+      at Layer.handle [as handle_request] (/home/pablo/curso/coder-backend-proyecto-final/node_modules/express/lib/router/layer.js:95:5)
+      at next (/home/pablo/curso/coder-backend-proyecto-final/node_modules/express/lib/router/route.js:144:13)
+      at Route.dispatch (/home/pablo/curso/coder-backend-proyecto-final/node_modules/express/lib/router/route.js:114:3)
+      at Layer.handle [as handle_request] (/home/pablo/curso/coder-backend-proyecto-final/node_modules/express/lib/router/layer.js:95:5)
+      at /home/pablo/curso/coder-backend-proyecto-final/node_modules/express/lib/router/index.js:284:15
+      at Function.process_params (/home/pablo/curso/coder-backend-proyecto-final/node_modules/express/lib/router/index.js:346:12)
+      at next (/home/pablo/curso/coder-backend-proyecto-final/node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (/home/pablo/curso/coder-backend-proyecto-final/node_modules/express/lib/router/index.js:175:3)
+      at router (/home/pablo/curso/coder-backend-proyecto-final/node_modules/express/lib/router/index.js:47:12)
+}
+[2023-03-22T23:10:54.050] [ERROR] errors - {
+  message: 'Failed to email admin about user registering',
+  error: TypeError: Cannot read properties of undefined (reading 'success')
+      at /home/pablo/curso/coder-backend-proyecto-final/src/routes/auth.routing.ts:69:39
+      at Generator.next (<anonymous>)
+      at /home/pablo/curso/coder-backend-proyecto-final/src/routes/auth.routing.ts:8:71
+      at new Promise (<anonymous>)
+      at __awaiter (/home/pablo/curso/coder-backend-proyecto-final/src/routes/auth.routing.ts:4:12)
+      at /home/pablo/curso/coder-backend-proyecto-final/src/routes/auth.routing.ts:45:69
+      at Layer.handle [as handle_request] (/home/pablo/curso/coder-backend-proyecto-final/node_modules/express/lib/router/layer.js:95:5)
+      at next (/home/pablo/curso/coder-backend-proyecto-final/node_modules/express/lib/router/route.js:144:13)
+      at /home/pablo/curso/coder-backend-proyecto-final/src/routes/auth.routing.ts:40:16
+      at allFailed (/home/pablo/curso/coder-backend-proyecto-final/node_modules/passport/lib/middleware/authenticate.js:110:18)
+}
+[2023-03-23T21:59:22.607] [ERROR] errors - {
+  message: 'User registered but failed to send mail to admin',
+  error: Error: Invalid login: 535 Authentication failed
+      at SMTPConnection._formatError (/home/pablo/curso/coder-backend-proyecto-final/node_modules/nodemailer/lib/smtp-connection/index.js:790:19)
+      at SMTPConnection._actionAUTHComplete (/home/pablo/curso/coder-backend-proyecto-final/node_modules/nodemailer/lib/smtp-connection/index.js:1548:34)
+      at SMTPConnection.<anonymous> (/home/pablo/curso/coder-backend-proyecto-final/node_modules/nodemailer/lib/smtp-connection/index.js:546:26)
+      at SMTPConnection._processResponse (/home/pablo/curso/coder-backend-proyecto-final/node_modules/nodemailer/lib/smtp-connection/index.js:953:20)
+      at SMTPConnection._onData (/home/pablo/curso/coder-backend-proyecto-final/node_modules/nodemailer/lib/smtp-connection/index.js:755:14)
+      at TLSSocket.SMTPConnection._onSocketData (/home/pablo/curso/coder-backend-proyecto-final/node_modules/nodemailer/lib/smtp-connection/index.js:193:44)
+      at TLSSocket.emit (node:events:513:28)
+      at TLSSocket.emit (node:domain:489:12)
+      at addChunk (node:internal/streams/readable:315:12)
+      at readableAddChunk (node:internal/streams/readable:289:9) {
+    code: 'EAUTH',
+    response: '535 Authentication failed',
+    responseCode: 535,
+    command: 'AUTH PLAIN'
+  }
+}
