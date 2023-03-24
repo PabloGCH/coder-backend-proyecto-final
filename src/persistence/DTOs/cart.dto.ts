@@ -27,9 +27,10 @@ export class CartDTO {
     }
 
     private async parseProducts(products_ids:any) {
-        const productManager = createManager(MANAGERTYPE.PRODUCTS)
+        const productManager = createManager(MANAGERTYPE.PRODUCTS);
+        const cartManager = createManager(MANAGERTYPE.CARTS);
         /*The attribute products_ids only exist if the chosen DB is MONGO*/
-        if (products_ids) {
+        if (products_ids !== undefined && products_ids !== null) {
             const objectProducts :any[] = products_ids || [];
             const nonRepeatingProducts :any = [];
             objectProducts.forEach((product_id :string|number) => {
@@ -46,6 +47,26 @@ export class CartDTO {
                     product: productDTO
                 })
             });
-        };
+        } else {
+            //If the attribute products_ids doesn't exist, it means that the chosen DB is MYSQL
+            const productIds = await cartManager?.getManyToManyRelation(this.id, "products");
+            const products = await productManager?.getObjectsByIds(productIds) || [];
+            products.forEach((product :any) => {
+                productIds.forEach((productId :string|number) => {
+                    const newProduct = {
+                        quantity: 0,
+                        product: new ProductDTO(product)
+                    }
+                    if (product.id === productId) {
+                        newProduct.quantity++;
+                    }
+                    this.products.push(newProduct);
+                });
+            });
+            
+
+            //const relatedObjects = await this.database(relation).whereIn('id', ids);
+        }
+
     }
 }

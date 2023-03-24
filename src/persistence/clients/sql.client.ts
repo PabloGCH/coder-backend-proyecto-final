@@ -82,21 +82,38 @@ export class SQLClient implements DbClient {
     public async addOneToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
 
     public async addManyToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {
-
-
+        await this.database(this.tableName + '_' + relation + '_relation').insert({
+            [this.tableName + '_id']: id,
+            [relation + '_id']: relatedId
+        });
+        const object = await this.database(this.tableName).where({id: id}).first();
+        return object;
     }
 
 
     public async getOneToOneRelation(id: string | number, relation: string): Promise<any> {}
     public async getOneToManyRelation(id: string | number, relation: string): Promise<any> {}
-    public async getManyToManyRelation(id: string | number, relation: string): Promise<any> {}
+    public async getManyToManyRelation(id: string | number, relation: string): Promise<any> {
+        const objects = await this.database(this.tableName + '_' + relation + '_relation')
+        .where(this.tableName + '_id', id)
+        .select(relation + '_id');
+        const ids = objects.map((object: any) => object[relation + '_id']);
+
+        //const relatedObjects = await this.database(relation).whereIn('id', ids);
+        return ids;
+
+    }
     public async deleteOneToOneRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
     public async deleteOneToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
 
 
 
     public async deleteManyToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {
-
-
+        await this.database(this.tableName + '_' + relation + '_relation').where({
+            [this.tableName + '_id']: id,
+            [relation + '_id']: relatedId
+        }).first().del();
+        const object = await this.database(this.tableName).where({id: id}).first();
+        return object;
     }
 }
