@@ -1,6 +1,6 @@
 import knex, { Knex } from "knex";
 import { errorLogger, infoLogger } from "../../services/logger.service";
-import { ProductSQLTable } from "../models/product.sql.table";
+import { ProductSQLTable } from "../tables/product.sql.table";
 import { sqloptions } from "./mysqlconfig";
 import { sqliteconfig } from "./sqliteconfig";
 

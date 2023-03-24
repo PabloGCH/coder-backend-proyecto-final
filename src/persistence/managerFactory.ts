@@ -14,11 +14,11 @@ const database :Knex | null = args.d == "SQLITE" ? knex(sqliteconfig) : null;
 export const createManager = (managerType :number) :DbClient|null => {
     if(managerType === MANAGERTYPE.PRODUCTS) {
         if(args.d === "MONGO") {
-            infoLogger.info({message: "Creating a new manager", type: "products", db: "mongo"});
+            infoLogger.info({message: "Creating a new manager", type: "product", db: "mongo"});
             return new ProductMongoManager;
         }
         if(args.d === "SQLITE" && database) {
-            infoLogger.info({message: "Creating a new manager", type: "products", db: "sqlite"});
+            infoLogger.info({message: "Creating a new manager", type: "product", db: "sqlite"});
             return new ProductSQLManager;
         }
     }

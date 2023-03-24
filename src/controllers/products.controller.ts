@@ -2,9 +2,9 @@ import { createManager } from "../persistence/managerFactory";
 import { Request, Response } from "express";
 import { MANAGERTYPE } from "../persistence/enums/managerType.enum";
 import { DbClient } from "../persistence/dbclient";
-import { Product } from "../models/interfaces/product.interface";
 import { errorLogger, infoLogger } from "../services/logger.service";
-import { ProductDTO } from "../models/DTOs/product.dto";
+import { ProductDTO } from "../persistence/DTOs/product.dto";
+import { Product } from "../persistence/interfaces/product.interface";
 
 export const getAllProducts = (req :Request, res :Response) => {
     try {

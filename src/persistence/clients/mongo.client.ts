@@ -28,4 +28,14 @@ export class MongoClient implements DbClient{
         let updatedObject = await this.model.findByIdAndUpdate(id, object);
         return updatedObject;
     }
+    public async addOneToOneRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
+    public async addOneToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
+    public async addManyToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
+    public async getOneToOneRelation(id: string | number, relation: string): Promise<any> {}
+    public async getOneToManyRelation(id: string | number, relation: string): Promise<any> {}
+    public async getManyToManyRelation(id: string | number, relation: string): Promise<any> {}
+    public async deleteOneToOneRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
+    public async deleteOneToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
+    public async deleteManyToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
+
 }
