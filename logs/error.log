@@ -858,3 +858,91 @@
   },
   _message: 'carts validation failed'
 }
+[2023-03-24T19:32:54.890] [ERROR] errors - TypeError: Cannot read properties of undefined (reading 'id')
+    at CartDTO.<anonymous> (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:20:26)
+    at Generator.next (<anonymous>)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:4:12)
+    at CartDTO.initialize (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:30:16)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/controllers/carts.controller.ts:62:27
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/pablo/curso/coder-backend-proyecto-final/src/controllers/carts.controller.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[2023-03-24T19:33:13.226] [ERROR] errors - TypeError: Cannot read properties of undefined (reading 'id')
+    at CartDTO.<anonymous> (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:20:26)
+    at Generator.next (<anonymous>)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:4:12)
+    at CartDTO.initialize (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:30:16)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/controllers/carts.controller.ts:62:27
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/pablo/curso/coder-backend-proyecto-final/src/controllers/carts.controller.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[2023-03-24T19:35:29.809] [ERROR] errors - TypeError: Cannot read properties of undefined (reading 'id')
+    at CartDTO.<anonymous> (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:20:26)
+    at Generator.next (<anonymous>)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:4:12)
+    at CartDTO.initialize (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:30:16)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/controllers/carts.controller.ts:62:27
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/pablo/curso/coder-backend-proyecto-final/src/controllers/carts.controller.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[2023-03-24T19:37:07.538] [ERROR] errors - TypeError: Cannot read properties of undefined (reading 'id')
+    at CartDTO.<anonymous> (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:20:26)
+    at Generator.next (<anonymous>)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:4:12)
+    at CartDTO.initialize (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:30:16)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/controllers/carts.controller.ts:64:27
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/pablo/curso/coder-backend-proyecto-final/src/controllers/carts.controller.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[2023-03-24T19:38:13.182] [ERROR] errors - TypeError: Cannot read properties of undefined (reading 'id')
+    at CartDTO.<anonymous> (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:20:26)
+    at Generator.next (<anonymous>)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:4:12)
+    at CartDTO.initialize (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:30:16)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/controllers/carts.controller.ts:62:27
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/pablo/curso/coder-backend-proyecto-final/src/controllers/carts.controller.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[2023-03-24T19:41:23.473] [ERROR] errors - TypeError: Cannot read properties of undefined (reading 'id')
+    at CartDTO.<anonymous> (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:20:26)
+    at Generator.next (<anonymous>)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:4:12)
+    at CartDTO.initialize (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:30:16)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/controllers/carts.controller.ts:61:27
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/pablo/curso/coder-backend-proyecto-final/src/controllers/carts.controller.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[2023-03-24T19:45:01.120] [ERROR] errors - TypeError: Cannot read properties of undefined (reading 'id')
+    at CartDTO.<anonymous> (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:20:26)
+    at Generator.next (<anonymous>)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:4:12)
+    at CartDTO.initialize (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:30:16)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/controllers/carts.controller.ts:61:27
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/pablo/curso/coder-backend-proyecto-final/src/controllers/carts.controller.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[2023-03-24T19:45:15.522] [ERROR] errors - TypeError: Cannot read properties of undefined (reading 'id')
+    at CartDTO.<anonymous> (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:20:26)
+    at Generator.next (<anonymous>)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:4:12)
+    at CartDTO.initialize (/home/pablo/curso/coder-backend-proyecto-final/src/persistence/DTOs/cart.dto.ts:30:16)
+    at /home/pablo/curso/coder-backend-proyecto-final/src/controllers/carts.controller.ts:61:27
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/pablo/curso/coder-backend-proyecto-final/src/controllers/carts.controller.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)

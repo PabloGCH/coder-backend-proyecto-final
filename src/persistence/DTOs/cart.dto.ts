@@ -5,13 +5,13 @@ import { ProductDTO } from "./product.dto";
 export class CartDTO {
     id: string = "";
     products: any[] = [];
-    status: string = "";
+    status: string | number = "";
     createdAt: Date | null = null;
     updatedAt: Date | null = null;
     constructor() {
         this.id = "";
         this.products = [];
-        this.status = "";
+        this.status = 0;
         this.createdAt =  null;
         this.updatedAt = null;
     }
@@ -19,9 +19,10 @@ export class CartDTO {
     public async initialize(object :any) {
         this.id = object.id || object._id || "";
         this.products = [];
-        this.status = object.status || "";
-        this.createdAt = object.createdAt || null;
-        this.updatedAt = object.updatedAt || null;
+        this.status = object.status || 0;
+        if(typeof this.status === "number") {this.status = this.status.toString()}
+        this.createdAt = object.createdAt || object.created_at || null;
+        this.updatedAt = object.updatedAt || object.updated_at || null;
         await this.parseProducts(object.products_ids);
     }
 

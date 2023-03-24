@@ -14,8 +14,8 @@ export class SQLClient implements DbClient {
     }
     public async save(object: any): Promise<any> {
         try {
-            let newObjectID = await this.database(this.tableName).insert(object);
-            let newObject = await this.database(this.tableName).where({id: newObjectID[0]}).first();
+            const newObjectID = await this.database(this.tableName).insert(object);
+            const newObject = await this.database(this.tableName).where({id: newObjectID[0]}).first();
             return newObject;
         } catch (error) {
             errorLogger.error(error);
@@ -24,8 +24,8 @@ export class SQLClient implements DbClient {
     }
     public async update(id: string | number, object: any): Promise<any> {
         try {
-            let newObjectID :any = await this.database(this.tableName).where({id: id}).update(object);
-            let newObject = await this.database(this.tableName).where({id: newObjectID}).first();
+            const newObjectID :any = await this.database(this.tableName).where({id: id}).update(object);
+            const newObject = await this.database(this.tableName).where({id: newObjectID}).first();
             return newObject;
         } catch (error) {
             errorLogger.error(error);
@@ -34,7 +34,7 @@ export class SQLClient implements DbClient {
     }
     public async delete(id: number): Promise<any> {
         try {
-            let deletedObject = await this.database(this.tableName).where({id: id}).first();
+            const deletedObject = await this.database(this.tableName).where({id: id}).first();
             if (deletedObject) {
                 await this.database(this.tableName).where({id: id}).first().del();
                 return deletedObject;
@@ -48,7 +48,7 @@ export class SQLClient implements DbClient {
     }
     public async getObjects(): Promise<any[]> {
         try {
-            let objects = await this.database(this.tableName).select();
+            const objects = await this.database(this.tableName).select();
             return objects;
         } catch (error) {
             errorLogger.error(error);
@@ -57,7 +57,7 @@ export class SQLClient implements DbClient {
     }
     public async getObject(id: string | number): Promise<any> {
         try {
-            let object = await this.database(this.tableName).where({id: id}).first();
+            const object = await this.database(this.tableName).where({id: id}).first();
             return object;
         } catch (error) {
             errorLogger.error(error);
@@ -66,22 +66,37 @@ export class SQLClient implements DbClient {
     }
 
     public async getObjectsByIds(ids: string[] | number[]): Promise<any[]> {
-        return [];
+        const objects = await this.database(this.tableName).whereIn('id', ids);
+        return objects || [];
     }
 
     public async getObjectByFields(fields: any) :Promise<any> {
-        return null;
+        const object = await this.database(this.tableName).where(fields).first();
+        console.log(object);
+        return object || null;
     }
 
 
 
     public async addOneToOneRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
     public async addOneToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
-    public async addManyToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
+
+    public async addManyToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {
+
+
+    }
+
+
     public async getOneToOneRelation(id: string | number, relation: string): Promise<any> {}
     public async getOneToManyRelation(id: string | number, relation: string): Promise<any> {}
     public async getManyToManyRelation(id: string | number, relation: string): Promise<any> {}
     public async deleteOneToOneRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
     public async deleteOneToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
-    public async deleteManyToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {}
+
+
+
+    public async deleteManyToManyRelation(id: string | number, relation: string, relatedId: string | number): Promise<any> {
+
+
+    }
 }

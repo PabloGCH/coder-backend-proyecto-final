@@ -7,7 +7,7 @@ const schema = new mongoose.Schema({
     },
     products_ids: {
         type: [String],
-        required: true
+        default: []
     },
     status: {
         type: String,

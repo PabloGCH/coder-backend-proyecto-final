@@ -55,7 +55,6 @@ export const getCart = async (req :Request | any, res :Response) => {
         } else {
             const newCart :Cart = await cartManager?.save({
                 userId: userId,
-                products_ids: [],
                 status: CART_STATUS.ACTIVE
             });
             const cartDTO = new CartDTO();

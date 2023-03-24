@@ -1,5 +1,7 @@
 import knex, { Knex } from "knex";
 import { errorLogger, infoLogger } from "../../services/logger.service";
+import { CartSQLTable } from "../tables/cart.sql.table";
+import { CartProductsSQLTable } from "../tables/cart_products_relation.table";
 import { ProductSQLTable } from "../tables/product.sql.table";
 import { sqloptions } from "./mysqlconfig";
 import { sqliteconfig } from "./sqliteconfig";
@@ -20,6 +22,12 @@ export class SQLDatabaseConnection {
         let tables = [{
             name: "products",
             schema: ProductSQLTable
+        }, {
+            name: "carts",
+            schema: CartSQLTable
+        }, {
+            name: "carts_products_relation",
+            schema: CartProductsSQLTable
         }];
         tables.forEach((table) => {
             SQLDatabaseConnection.database.schema.hasTable(table.name).then((exists) => {
